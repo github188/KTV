@@ -1,0 +1,66 @@
+.userManager {
+    font-size:12px;
+    width: 114px;
+    position: absolute;
+    z-index: 555;
+    zoom: 1;
+    left: 0;
+    top: 0;
+}
+.userManager .userWrap {
+    border: 1px solid #ccc;
+    background:url("../img/menubg.png") repeat-y;
+}
+.user-icon{
+    position:absolute;
+    top:0;
+    left:0;
+    width:22px;
+    height:22px;
+    display:block;
+    background:url("../img/menuicon.png") no-repeat 0 0;
+}
+.user-manager:hover{
+   background-color: #7c7c7c;
+}
+.current_user_manager{
+    background-color: #7c7c7c;
+}
+.onmai{
+    background-position:0 0;
+}
+.offmai{
+    background-position:0 -22px;
+}
+.topmai{
+    background-position:0 -45px;
+}
+.delmai{
+    background-position:0 -90px;
+}
+.kick{
+    background-position:0 -114px;
+}
+.freeze{
+    background-position:0 -136px;
+}
+.forbid{
+    background-position:0 -158px;
+}
+.force-out{
+    background-position:0 -182px;
+}
+.userManager .ul-list {
+    padding:0;
+    margin:0;
+}
+.userManager .ul-list li{
+    height:24px;
+    line-height:24px;
+    padding-left:35px;
+    position:relative;
+}
+.userManager .ul-list li a{
+    color:#000;
+    text-decoration:none;
+}

@@ -1,0 +1,68 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <script type="text/javascript" src="http://static.vvku.com/web/4/frontend/base/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="http://static.vvku.com/web/4/frontend/base/messenger/messenger.js"></script>
+    <script type="text/javascript">
+        var htmlvars = {};
+        $(function(){
+            var height = document.documentElement.clientHeight;
+            $("#parentBody").height(height);
+
+
+            $.ajax({
+                url: '/rooms/ajax_info.php',
+                type: 'POST',
+                async: false,
+                data: {Tag: "GetRoomLoginUser", "GroupId": "20229998"},
+                dataType: 'JSON',
+                success: function (data) {
+                    htmlvars = {"roombg": "http://oss.vvku.com/pic/vvku-dev/roombg/5880309_zgd1bk/0/0.jpg", "bgalign": "1", "uin": data.Uin, "sessionkey": data.Token, "url": "ws://192.168.1.58:8365/client", "roomid": "5880309", "Ip": "101.71.249.178", "GroupId": "20229998", "play_media": {"videocode": "h264", "highquality_videocode": "h264", "videosize": "320*240", "highquality_videosize": "320*240", "videofps": "10", "highquality_videofps": "10", "videokbps": "128", "highquality_videokbps": "128", "audiocode": "NellyMoser", "highquality_audiocode": "HE-AAC", "audiohz": "16000", "highquality_audiohz": "16000", "audiokbps": "16", "highquality_audiokbps": "16", "buffertime": "1000"}, "admin_media": {"videocode": "h264", "highquality_videocode": "h264", "videosize": "320*240", "highquality_videosize": "640*480", "videofps": "10", "highquality_videofps": "", "videokbps": "64", "highquality_videokbps": "", "audiocode": "NellyMoser", "highquality_audiocode": "HE-AAC", "audiohz": "8000", "highquality_audiohz": "96000", "audiokbps": "8", "highquality_audiokbps": "", "buffertime": "1000"}, "p2p_media": {"videocode": "h264", "highquality_videocode": "h264", "videosize": "320*240", "highquality_videosize": "320*240", "videofps": "10", "highquality_videofps": "10", "videokbps": "160", "highquality_videokbps": "160", "audiocode": "NellyMoser", "highquality_audiocode": "HE-AAC", "audiohz": "16000", "highquality_audiohz": "16000", "audiokbps": "96", "highquality_audiokbps": "48", "buffertime": "2000"}, "roomurl": "http://oss.vvku.com/pic/vvku-dev/roomid/5880309_zgd1bk/0/0.jpg", "roomname": "5880309"};
+                },
+                error: function () {
+                    //alert('房间信息获取失败');
+                    //window.location.href="/";
+                    //htmlvars = {"roombg":"","bgalign":"","Uid":"","Nick":"游客","uin":"","sessionkey":"4811B76EB0139ACAD2670C15FF121829","url":"ws://192.168.1.58:8365/client","roomid":"5880309","Ip":"101.71.249.178","GroupId":"20229998","play_media":{"videocode":"h264","highquality_videocode":"h264","videosize":"320*240","highquality_videosize":"320*240","videofps":"10","highquality_videofps":"10","videokbps":"128","highquality_videokbps":"128","audiocode":"NellyMoser","highquality_audiocode":"HE-AAC","audiohz":"16000","highquality_audiohz":"16000","audiokbps":"16","highquality_audiokbps":"16","buffertime":"1000"},"admin_media":{"videocode":"h264","highquality_videocode":"h264","videosize":"320*240","highquality_videosize":"640*480","videofps":"10","highquality_videofps":"","videokbps":"64","highquality_videokbps":"","audiocode":"NellyMoser","highquality_audiocode":"HE-AAC","audiohz":"8000","highquality_audiohz":"96000","audiokbps":"8","highquality_audiokbps":"","buffertime":"1000"},"p2p_media":{"videocode":"h264","highquality_videocode":"h264","videosize":"320*240","highquality_videosize":"320*240","videofps":"10","highquality_videofps":"10","videokbps":"160","highquality_videokbps":"160","audiocode":"NellyMoser","highquality_audiocode":"HE-AAC","audiohz":"16000","highquality_audiohz":"16000","audiokbps":"96","highquality_audiokbps":"48","buffertime":"2000"},"roomurl":"http://oss.vvku.com/pic/vvku-dev/roomid/5880309_zgd1bk/0/0.jpg","roomname":"5880309"};
+                    htmlvars = {"roombg": "http://oss.vvku.com/pic/vvku-dev/roombg/5880309_zgd1bk/0/0.jpg", "Uid": "20229998", "Nick": "20229998", "uin": "20229998", "bgalign": "1", "url": "ws://192.168.1.58:8365/client", "roomid": "5880309", "Ip": "101.71.249.178", "GroupId": "20229998", "play_media": {"videocode": "h264", "highquality_videocode": "h264", "videosize": "320*240", "highquality_videosize": "320*240", "videofps": "10", "highquality_videofps": "10", "videokbps": "128", "highquality_videokbps": "128", "audiocode": "NellyMoser", "highquality_audiocode": "HE-AAC", "audiohz": "16000", "highquality_audiohz": "16000", "audiokbps": "16", "highquality_audiokbps": "16", "buffertime": "1000"}, "admin_media": {"videocode": "h264", "highquality_videocode": "h264", "videosize": "320*240", "highquality_videosize": "640*480", "videofps": "10", "highquality_videofps": "", "videokbps": "64", "highquality_videokbps": "", "audiocode": "NellyMoser", "highquality_audiocode": "HE-AAC", "audiohz": "8000", "highquality_audiohz": "96000", "audiokbps": "8", "highquality_audiokbps": "", "buffertime": "1000"}, "p2p_media": {"videocode": "h264", "highquality_videocode": "h264", "videosize": "320*240", "highquality_videosize": "320*240", "videofps": "10", "highquality_videofps": "10", "videokbps": "160", "highquality_videokbps": "160", "audiocode": "NellyMoser", "highquality_audiocode": "HE-AAC", "audiohz": "16000", "highquality_audiohz": "16000", "audiokbps": "96", "highquality_audiokbps": "48", "buffertime": "2000"}, "roomurl": "http://oss.vvku.com/pic/vvku-dev/roomid/5880309_zgd1bk/0/0.jpg", "roomname": "5880309"};
+                }
+
+            })
+        });
+
+        /* function onBeforeUnload(){
+         //用户点击浏览器右上角关闭按钮或是按alt+F4关闭
+         if(event.clientX>document.body.clientWidth&&event.clientY<0||event.altKey){
+         // alert("点关闭按钮");
+         document.getElementByIdx_x("hiddenForm:hiddenBtn").click();
+         // window.event.returnValue="确定要退出本页吗?";
+         }
+         //用户点击任务栏，右键关闭。s或是按alt+F4关闭
+         else if(event.clientY > document.body.clientHeight || event.altKey)
+         {
+         // alert("任务栏右击关闭");
+         document.getElementByIdx_x("hiddenForm:hiddenBtn").click();
+         // window.event.returnValue="确定要退出本页吗?";
+         }
+         //其他情况为刷新
+         else{
+         var cookie = $.cookie ;
+         }
+         }*/
+    </script>
+</head>
+<body id="parentBody" style="margin:0px;overflow-y: auto">
+<iframe id="home" frameborder=0 src="#" height="100%" width="100%" scrolling="no" marginheight="0px">
+</iframe>
+<script>
+    var messenger = new Messenger('parent'), home = document.getElementById('home');
+    messenger.listen(function (msg){
+        messenger.targets["home"].send(JSON.stringify(htmlvars));
+    });
+    messenger.addTarget(home.contentWindow, 'home');
+    home.src = "home.html";
+
+</script>
+</body>
+</html>
+

@@ -1,0 +1,325 @@
+<div class="player" >
+    <a href="#" class="btn-play" id="btn_play">上麦</a>
+
+    <form action="" method="post" style="width: 320px; height: 260px; font-family: '宋体'; font-size: 12px;display:none">
+        <label id="Label15">视频帧率：</label><input name="videoFPS" type="text"  style="width: 90px" value="10" id="videoFPS" onchange="setCameraMode()" /><br />
+        <label id="Label120">视频码率：</label><input name="videoKBitrate" style="width: 90px" type="text" value="160" id="videoKBitrate" onchange="setCameraQuality()" />
+        (kbps)<br />
+        <label id="Label121">视频宽：</label><input name="width" style="width: 56px" type="text" value="320" id="width" onchange="setCameraMode()" />
+        <label id="Label122"><br />
+            视频高：</label><input name="height" style="width: 56px" type="text" value="240" id="height" onchange="setCameraMode()" /><br />
+        <label id="Label123">视频质量(0-100)：</label><input name="videoQuality" style="width: 39px" type="text" value="80" id="videoQuality" onchange="setCameraQuality()" /><br />
+        <label id="Label124">关键帧间隔(1-48)：</label><input name="videoKeyFrameInterval" style="width: 38px" type="text" value="30" id="videoKeyFrameInterval" onchange="setKeyFrameInterval()" /><br />
+        <label id="Label125">音频码率(kbps)：</label><input name="audioKBitrate" style="width: 91px" type="text" value="32" id="audioKBitrate" onchange="setAudioBitrate()" /><br />
+        <label id="Label126">音频采样率(Hz)：</label><input name="audioSamplerate" style="width: 92px" type="text" value="16000" id="audioSamplerate" onchange="setAudioSamplerate()" /><br />
+        <label id="Label127">音频通道数：</label><input name="audioChannelCount" style="width: 115px" type="text" value="2" id="audioChannelCount" onchange="setAudioChannelCount()" /><br />
+        <label id="Label128">采样精度(bit)：</label><input name="audioBitPerSample" style="width: 95px" type="text" value="16" id="audioBitPerSample" onchange="setAudioBitPerSample()" />
+    </form>
+    <form action="" method="post" style="height: 143px; font-family: 宋体; font-size: 12px;display: none">
+        <label id="Label22">调度时Ping超时：</label><input name="schedulingPing" style="width: 55px" type="text" id="schedulingPing" value="1500" />
+        <label id="Label23">播放时超过Ping就切换服务器：</label><input name="limitCheckPing" style="width: 56px" type="text" id="limitCheckPing" value="300" /><br />
+        <label id="Label24">检测Ping间隔：</label><input name="checkPingTimer" style="width: 73px" type="text" id="checkPingTimer" value="1000" />
+        <input name="Checkbox8" type="checkbox" />
+        <label id="Label25">自动检测Ping</label><br />
+        <label id="Label26">检测Delay范围：</label><input name="Text45" style="width: 70px" type="text" />
+        <label id="Label27">Delay范围内次数：</label><input name="Text46" style="width: 55px" type="text" /><input name="Text50" style="width: 56px" type="text" /><br />
+        <label id="Label28">Delay最大值：</label><input name="Text47" style="width: 44px" type="text" />
+        <label id="Label29">最小值：</label><input name="Text48" style="width: 46px" type="text" />
+        <label id="Label30">平均值：</label><input name="Text49" style="width: 53px" type="text" />
+    </form>
+    <form action="" method="post" style="height: 158px; width: 510px; font-family: 宋体; font-size: 12px;display:none">
+        <label id="Label1116">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;自动加速阈值：加速时间：加速度：缓冲区时间<br />
+        </label><label id="Label1117">自定义：</label><input name="speedupRange" style="width: 60px" type="text" id="speedupRange" value="5" />
+        <input name="speedupTime" style="width: 60px" type="text" id="speedupTime" value="4" />
+        <input name="speedupSpeed" style="width: 60px" type="text" id="speedupSpeed" value="10" />
+        <input name="bufferTime" style="width: 60px" type="text" id="bufferTime" value="2" />
+        <input name="Button14" style="width: 125px" type="button" onclick="setPlayMode()" value="设置缓冲区时间" /><br />
+        <input name="isReceiveVideo" type="checkbox" checked="checked" id="isReceiveVideo" onchange="setReceiveVideo()" /><label id="Label18">接收视频</label>
+        <input name="isReceiveAudio" type="checkbox" checked="checked" id="isReceiveAudio" onchange="setReceiveAudio()" /><label id="Label129">接收音频</label>
+        <label id="Label1119">BufferEmpty总次数：</label><input name="Text37" style="width: 52px" type="text" />
+        <label id="Label20">BufferFull总次数：</label><input name="Text38" style="width: 51px" type="text" /><br />
+        <label id="Label130">窗口宽：</label><input name="displayWidth" id="displayWidth" style="width: 39px" type="text" value="320" />
+        <label id="Label131">高：</label><input name="displayHeight" id="displayHeight" style="width: 43px" type="text" value="240" />
+        <input name="Button19" style="width: 107px" type="button" onchange="setVideoDisplaySize()" value="设置窗口大小" />
+        <label id="Label21">音量：</label><input name="volume" style="width: 31px" type="text" id="volume" onchange="setVolume()" value="80" />
+        <input name="isMute" type="checkbox" id="isMute" onchange="setMute()" /><label id="Label132">静音</label>
+    </form>
+    <form action="" method="post" style="width: 320px; height: 260px; font-family: 宋体; font-size: 12px;display: none">
+        <p>
+            <label id="Label19">音频编码：</label>
+            <select name="audioCodecList" style="width: 150px" id="audioCodecList" onchange="setAudioCodec()">
+            </select>
+            <br />
+            <label id="Label9">视频编码：</label>
+            <select name="videoCodecList" style="width: 150px" id="videoCodecList" onchange="setVideoCodec()">
+            </select>
+            <br />
+            <label id="Label10">摄 像 头：</label>
+            <select name="camList" style="width: 150px" id="ccamList" onchange="setCam()">
+            </select>
+            <br />
+            <label id="Label11">麦 克 风：</label>
+            <select name="micList" style="width: 150px" id="MmicList" onchange="setMic()">
+            </select>
+            <br />
+            <input name="isUseCam" type="checkbox" checked="checked" id="isUseCam" onchange="setIsUseCam()" />
+            <label id="Label14">使用摄像头</label>
+            <input name="isUseMic" type="checkbox" checked="checked" id="isUseMic" onchange="setIsUseMic()" />
+            <label id="Label44">使用麦克风</label>
+            <br />
+            <input name="Button" type="button" value="麦克风"  onclick="setCapAudioFromMic()" />
+            <input name="Button2" type="button" value="混音"  onclick="setCapAudioFromStereo()" />
+            <br />
+            <input name="Button12" type="button" value="插件测试"  onclick="checkPlugin()" />
+            <input name="Button13" type="button" value="下载插件" onclick="downloadHD()" /><br />
+            <label id="Label12">满足下列条件将提示带宽不足：</label>
+            <br />
+            <label id="Label13">10s内平均ping大于：</label>
+            <input name="avgPing" style="width: 78px" type="text" value="200" id="avgPing" onchange="setAvgPing()" /><br />
+        </p>
+    </form>
+
+    <form action="" method="post" style="width: 320px; height: 260px; font-family: 宋体; font-size: 12px;display:none">
+        <label id="Label1">服务器版本：</label><input name="serverVersion" id="serverVersion" style="width: 150px" type="text" /><br />
+        <label id="Label2">客户端版本：</label><input name="clientVersion" id="clientVersion" style="width: 150px" type="text" /><br />
+        <label id="Label3">当前服务器：</label><input name="currentServer" id="currentServer" style="width: 150px" type="text" /><br />
+        <label id="Label4">flash 版本：</label><input name="flashVersion" id="flashVersion" style="width: 150px" type="text" /><br />
+        <label id="Label5">最低支持插件版本：</label><input name="lowestSupportHQVersion" id="lowestSupportHQVersion" style="width: 150px" type="text" /><br />
+        <label id="Label6">实际使用插件版本：</label><input name="HQVersion" id="HQVersion" style="width: 150px" type="text" /><br />
+        <label id="Label16">session:</label><input name="session" style="width: 75px" type="text" id="session" value="TestSession" />
+        <label id="Label17">ID:</label><input name="userID" style="width: 48px" type="text" id="userID" value="Test" />
+            <input name="isHD" type="checkbox" id="isHD" /><label id="Label7">高清</label>
+            <input name="isUDP" type="checkbox" id="isUDP" /><label id="Label8">UDP</label>
+            <input name="rtmpAddr" style="width: 135px" type="text" id="rtmpAddr" value="testrtmp.vvku.com:1966" />
+            <input name="rtmpLive" style="width: 46px" type="text" id="rtmpLive" value="live" />
+            <input name="rtmpStream" style="width: 46px" type="text" id="rtmpStream" value="stream1" />
+            <input name="rtmpArea" style="width: 46px" type="text" id="rtmpArea" value="hangzhou" /><br />
+        <select name="changeServerList" style="width: 216px" id="changeServerList">
+        </select>
+            <input name="changeServerBtn" style="width: 90px" type="button" value="切换服务器" id="changeServerBtn" onclick="changeServer()" /><br />
+            <input name="initBtn" style="width: 48px" type="button" value="初始化" id="initBtn" onclick="initConnect()" />
+            <input name="closeBtn" style="width: 48px" type="button" value="断开" id="closeBtn" onclick="closeConnect()" />
+            <input name="publishBtn" style="width: 48px" type="button" value="上麦" id="publishBtn" onclick="startPublish()" />
+            <input name="playBtn" style="width: 48px" type="button" value="播放" id="playBtn" onclick="startPlay()" />
+            <input name="pauseBtn" style="width: 48px" type="button" value="暂停" id="pauseBtn" onclick="pause()" />
+            <input name="stopBtn" style="width: 48px" type="button" value="停止" id="stopBtn" onclick="stop()" />
+    </form>
+    <form action="" method="post">
+        <textarea rows="1" cols="20" name="mediaInfo" style="width: 320px; height: 60px; font-family: 宋体; font-size: 12px;display:none" id="mediaInfo" readonly="readonly"></textarea>
+    </form>
+    <form action="" method="post">
+        <textarea rows="1" cols="20" name="streamInfo" style="width: 320px; height: 40px; font-family: 宋体; font-size: 12px;display:none" id="streamInfo" readonly="readonly"></textarea>
+    </form>
+    <div id="myPlayer">
+
+    </div>
+    <script type="text/javascript">
+
+    function setAudioCodec()
+    {
+        if (player1){
+            var audioCodec = _audioCodecList.options[_audioCodecList.selectedIndex].value;
+            player1.setAudioCodec(audioCodec);
+        }
+    }
+    function setVideoCodec()
+    {
+        if (player1){
+            var videoCodec = _videoCodecList.options[_videoCodecList.selectedIndex].value;
+            player1.setVideoCodec(videoCodec);
+        }
+    }
+    function setMic()
+    {
+        if (player1){
+            var micID = -1;
+            for(var i=0; i<_micIndexArray.length; i++)
+            {
+                if(i == _micList.selectedIndex)
+                {
+                    micID = _micIndexArray[i]
+                    break;
+                }
+            }
+            player1.setVideoCodec(micID);
+        }
+    }
+    function setCam()
+    {
+        if (player1){
+            var camID = -1;
+            for(var i=0; i<_camIndexArray.length; i++)
+            {
+                if(i == _camList.selectedIndex)
+                {
+                    camID = _camIndexArray[i]
+                    break;
+                }
+            }
+            player1.setVideoCodec(camID);
+        }
+    }
+    function setIsUseCam()
+    {
+        if (player1){
+            var checked = _isUseCam.checked;
+            player1.setIsUseCam(checked);
+        }
+    }
+    function setIsUseMic()
+    {
+        if (player1){
+            var checked = _isUseMic.checked;
+            player1.setIsUseMic(checked);
+        }
+    }
+    function downloadHD(){
+        if(player1){
+            player1.downloadHD();
+        }
+    }
+    function checkPlugin(){
+        if(player1){
+            var result = player1.checkPlugin();
+            if (result){
+                switch(result.status)
+                {
+                    case 1:
+                        _mediaInfo.value = 'HQPlugin is ready\n'+_mediaInfo.value;
+                        break;
+                    default:
+                        _mediaInfo.value = 'HQPlugin need help: '+result.info+'\n'+_mediaInfo.value;
+                        break;
+                }
+            }
+            else{
+                document.getElementById("mediaInfo").value += 'HQPlugin check error\n';
+            }
+        }
+    }
+    function setAvgPing(){
+        if(player1){
+            player1.setAvgPing(_avgPing.value);
+        }
+    }
+    function setCameraMode(){
+        if(player1){
+            player1.setCameraMode(_width.value, _height.value, _videoFPS.value);
+        }
+    }
+    function setKeyFrameInterval(){
+        if(player1){
+            player1.setKeyFrameInterval(_videoKeyFrameInterval.value);
+        }
+    }
+    function setCameraQuality(){
+        if(player1){
+            player1.setCameraQuality(_videoKBitrate.value, _videoQuality.value);
+        }
+    }
+    function setAudioBitrate(){
+        if(player1){
+            player1.setAudioBitrate(_audioKBitrate.value);
+        }
+    }
+    function setAudioSamplerate(){
+        if(player1){
+            player1.setAudioSamplerate(_audioSamplerate.value);
+        }
+    }
+    function setAudioChannelCount(){
+        if(player1){
+            player1.setAudioChannelCount(_audioChannelCount.value);
+        }
+    }
+    function setAudioBitPerSample(){
+        if(player1){
+            player1.setAudioBitPerSample(_audioBitPerSample.value);
+        }
+    }
+    function changeServer(){
+        if(player1){
+            var addr;
+            var lineType;
+            var serverString = _changeServerList.options[_changeServerList.selectedIndex].value;
+            var serverArray = serverString.split('#');
+            if (serverArray.length >= 3){
+                addr = serverArray[1];
+                lineType = serverArray[2];
+                player1.changeServer(addr, lineType);
+            }
+        }
+    }
+    function setMute(){
+        if(player1){
+            player1.setMute(this._isMute.checked);
+        }
+    }
+    function setVolume(){
+        if(player1){
+            player1.setVolume(this._volume.value);
+        }
+    }
+    function setPlayMode(){
+        if(player1){
+            player1.setPlayMode(this._bufferTime.value, this._speedupRange.value, this._speedupTime.value, this._speedupSpeed.value);
+        }
+    }
+    function setVideoDisplaySize(){
+        if(player1){
+            player1.setVideoDisplaySize(this._displayWidth.value, this._displayHeight.value);
+        }
+    }
+    function setReceiveAudio(){
+        if(player1){
+            player1.setReceiveAudio(this._isReceiveAudio.checked);
+        }
+    }
+    function setReceiveVideo(){
+        if(player1){
+            player1.setReceiveVideo(this._isReceiveVideo.checked);
+        }
+    }
+    function setCapAudioFromMic(){
+        if(player1){
+            player1.setCapAudioFromMic();
+        }
+    }
+    function setCapAudioFromStereo(){
+        if(player1){
+            player1.setCapAudioFromStereo();
+        }
+    }
+    </script>
+</div>
+
+
+<div class="deviceBox" id="deviceBox" style="display:none">
+    <div class="deviceMask">
+        <em class="close" id="btn_close_deviceBox"title="关闭">关闭</em>
+        <div class="overFrameContent">
+            <h2>上麦表演前，请选择适当的设备</h2>
+            <div class="fix">
+                <div class="video">
+                    <p>视频：</p>
+                    <select name="camList" style="width: 150px" id="camList" onchange="setCam()">
+                    </select>
+                </div>
+                <div class="voice">
+                    <p>音频：</p>
+                    <select name="micList" style="width: 150px" id="micList" onchange="setMic()">
+                    </select>
+                </div>
+            </div>
+            <h2>是否使用高清插件?</h2>
+            <div class="checkwrap">
+                <p><input type="radio" name="useGao" checked="checked" value="0"/><label>使用高清插件上麦</label></p>
+                <p><input type="radio" name="useGao" vaue="1"/><label>普通上麦</label></p>
+            </div>
+            <div class="btnwrap">
+                <input type="button"  class="confirm-btn" id="btn_next" value="下一步"/>
+            </div>
+        </div>
+    </div>
+</div>
+

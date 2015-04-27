@@ -1,0 +1,95 @@
+.deviceBox{
+    width: 345px;
+    height: 280px;
+    position: absolute;
+    line-height: 100%;
+    z-index: 1000;
+    left: 50%;
+    margin-left: 480px;
+    top: 280px;
+}
+.deviceMask {
+    width: 345px;
+    height: 280px;
+    color: #666;
+    position: absolute;
+    left: 0;
+    top: 0;
+    overflow: hidden;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    border:1px solid #d3d3d3;
+    background:#f8f8f8;
+}
+.deviceMask .close {
+    width: 18px;
+    height: 18px;
+    z-index: 10;
+    line-height: 100px;
+    overflow: hidden;
+    display: block;
+    cursor: pointer;
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    background:url("../img/close1.png") no-repeat 0 3px;
+}
+.deviceMask .head{
+    color:#333333;
+    font-size:18px;
+    height:20px;
+    line-height:35px;
+    text-indent:15px;
+}
+.deviceMask .overFrameContent{
+    padding:10px 20px;
+}
+.overFrameContent h2{
+    font-size:15px;
+    margin:20px auto 0;
+    padding-top:5px;
+}
+.overFrameContent .video{
+    width:50%;
+    float:left;
+}
+.overFrameContent .video select{
+    width:140px;
+}
+.overFrameContent .video p{
+    margin:20px 0 10px;
+}
+.overFrameContent .voice{
+    width:50%;
+    float:left;
+}
+.overFrameContent .voice select{
+    width:140px;
+}
+.overFrameContent .voice p{
+    margin:20px 0 10px;
+}
+.overFrameContent .checkwrap{
+    margin:30px 0 0 30px;
+}
+.overFrameContent .checkwrap p{
+    margin-top:10px;
+}
+.overFrameContent .checkwrap p input[type="radio"]{
+    position:relative;
+    top:-2px;
+}
+.overFrameContent .btnwrap{
+    height:30px;
+    margin-top:20px;
+}
+.overFrameContent .btnwrap .confirm-btn{
+    color:#fff;
+    width:69px;
+    height:27px;
+    line-height:27px;
+    border:0;
+    cursor:pointer;
+    margin-left: 40%;
+    background:url("../img/btn/btn2.png") no-repeat 0 0;
+}

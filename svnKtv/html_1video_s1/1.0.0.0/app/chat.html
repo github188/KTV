@@ -1,0 +1,233 @@
+<!--聊天室-->
+
+
+                        <div class="col_chat">
+                            <div class="room-chat-panel">
+                                <a href="#" class="song-icon" id="song-icon">点歌</a>
+                                <a href="#" class="garage-icon" id="garage-icon">车库</a>
+                                <div class="room-chat-tab">
+                                    <ul class="fix" id="chat_type">
+                                        <li class="on" id="all_icon"><a href="#" class="all-icon">全部</a>
+                                        <li id="gift_icon"><a href="#" class="gift-icon">礼物</a>
+                                    </ul>
+                                </div>
+                                <!--/.room_chat_tab-->
+                                <div id="chatTabs" class="room-chat-body" style="height:624px;">
+                                    <div id="chatBody" class="watch-chat">
+                                        <div class="watchchat-box room-chat-bg" style="height:532px;">
+                                            <div class="chat-public">
+                                                <div class="stream">
+                                                    <ul class="chatList">
+                                                        <li><span class="red">【房间公告】</span>：<span class="red">首充送大礼！好礼送不停！充值链接，请点击</span></li>
+                                                        <li><span class="red"> [房] </span>(15:03:26)<img src="app/src/img/rich/f1.png" width="35" height="18" /><img src="app/src/img/star/y3.png" width="26" height="18" />[20229946]摇骰子，摇出了4点</li>
+                                                        <li><span class="red"> [房] </span>(15:03:26)<img src="app/src/img/rich/f1.png" width="35" height="18" /><img src="app/src/img/star/y3.png" width="26" height="18" />[圣诞圣诞快乐]对[所有人]说：新来的朋友请注册：</li>
+                                                        <li>点击页面顶端的"注册""登录"就可以和主播在线聊天、现场互动啦！</li>
+                                                    </ul>
+                                                    <div class="chatList" id="public"></div>
+                                                </div>
+                                            </div>
+                                            <!--/.chat-public-->
+                                            <div class="chat-private">
+                                                <div class="stream">
+                                                    <ul class="chatList">
+                                                        <li><span class="red">[系]</span>(16:07:43)<span class="red">【登录成功】</span></li>
+                                                        <li><span class="red">[系]</span>(16:07:43)<img src="app/src/img/rich/f1.png" width="35" height="18" /><img src="app/src/img/star/y3.png" width="26" height="18" /><span class="blue">[音乐大包子]</span> 对<span class="red"> [你]</span> 说：欢迎来到唱唱！</li>
+                                                        <li><span class="red">[系]</span>(15:03:26)<img src="app/src/img/rich/f1.png" width="35" height="18" /><img src="app/src/img/star/y3.png" width="26" height="18" /><span class="green">[音乐大包子]</span>对<span class="blue">[所有人]</span>说：新来的朋友请注册：点击页面顶端的"注册""登录"就可以和主播在线聊天、现场互动啦！</li>
+                                                    </ul>
+                                                    <div class="chatList" id="private"></div>
+                                                </div>
+                                            </div>
+                                            <!--/.chat-private-->
+                                            <div class="chat-bar">
+                                                <span></span>
+                                                <i></i>
+                                            </div>
+                                            <!--/.chat-bar-->
+                                        </div>
+                                        <div class="watch-chat-act">
+                                            <div class="chat-set">
+                                                <span class="to">对</span>
+                                        	<span class="to-name">
+                                            	<a href="#" id="chatTo" class="to-select"></a>
+                                                <input type="text" id="chatReceiver"  code="0" value="所有人" class="input-text name" />
+                                             <div class="chatToList"  style="display:none">
+                                                 <ul id="chatToList">
+                                                     <li class="chatWith" title="所有人"><a href="#">所有人</a></li>
+                                                 </ul>
+                                             </div></span>
+                                                <label class="to-priv">
+                                                    <!--[if !IE]>-->
+                                                    <input type="checkbox" class="check">
+                                                    <!--<![endif]-->
+                                                    <!--[if lt IE 10 ]>
+                                                    <input type="checkbox" class="check check-ie" disabled />
+                                                    <![endif]-->
+                                                    <span class="t2">悄悄话</span>
+                                                </label>
+                                                <span id="img_btn">
+                                                    <button type="button" class="face" title="表情"></button>
+                                                    <button type="button" class="colorbar" title="彩条"></button>
+                                                    <button type="button" class="seal" title="印章"></button>
+                                                    <button type="button" class="wheat" title="秘麦"></button>
+                                                    <button type="button" class="dice" title="骰子"></button>
+                                                    <button type="button" class="lockscreen" title="锁屏"></button>
+                                                    <button type="button" class="usermenu" title="用户操作菜单"></button>
+                                                    <button type="button" class="votes" title="人气票"></button>
+                                                </span>
+                                            </div>
+                                            <div class="chat-txt">
+                                            <span class="to-text">
+                                                <input type="text" class="input-text disabled" id="chat_post" value="">
+                                            </span>
+                                                <a href="#" class="chat-btn"></a>
+                                            </div>
+                                        </div>
+                                        <!--/.watch-chat-act-->
+                                    </div>
+
+                                    <div id="giftBodyOnly" class="watchGift" style="display:none">
+
+                                    </div>
+                                </div>
+                                <!--<div class="getSongm" style="display:none" id="song-icon"></div>
+                                <div class="getGaragem" style="display:none" id="garage-icon"></div>-->
+                            </div>
+                            <!--/.room_chat_body-->
+                        </div>
+
+
+<!--表情弹出窗--->
+<div id="face_dialog" class="faceBox" style="display:none;position:absolute;margin-top:288px;margin-left:-345px">
+    <div class="faceMask">
+        <em class="close" title="关闭">关闭</em>
+        <h5 class="login-head">表情</h5>
+        <div style="height:283px;overflow: auto">
+            <div class="face-tab">
+                <ul class="clears" id="faceType">
+                </ul>
+            </div>
+            <div class="faceList">
+                <table width="330" cellpadding="0" cellspacing="0">
+                    <tbody id="defaultFace">
+                    </tbody>
+                </table>
+                <table width="330" cellpadding="0" cellspacing="0">
+                    <tbody id="monkeyFace">
+                    </tbody>
+                </table>
+                <table width="330" cellpadding="0" cellspacing="0">
+                    <tbody id="paoPaoFace">
+                    </tbody>
+                </table>
+                <table width="330" cellpadding="0" cellspacing="0">
+                    <tbody id="tuSiJiFace">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--印章弹出窗--->
+<div id="seal_dialog" class="faceBox" style="display:none;position:absolute;margin-top: 305px;margin-left:-355px">
+    <div class="faceMask" style="width:490px">
+        <em class="close" title="关闭">关闭</em>
+        <h5 class="login-head">印章</h5>
+        <div class="overFrameContent">
+            <div class="face-tab">
+                <ul class="clears" id="sealType">
+
+                </ul>
+            </div>
+            <div class="faceList">
+                <table width="330" cellpadding="0" cellspacing="0">
+                    <tbody id="designationFace" style="overflow-style: auto">
+                    </tbody>
+                </table>
+                <table width="330" cellpadding="0" cellspacing="0" style="overflow-style: auto">
+                    <tbody id="complimentFace">
+                    </tbody>
+                </table>
+                <table width="330" cellpadding="0" cellspacing="0" style="overflow-style: auto">
+                    <tbody id="characterFace">
+                    </tbody>
+                </table>
+                <table width="330" cellpadding="0" cellspacing="0" style="overflow-style: auto">
+                    <tbody id="brainsFace">
+                    </tbody>
+                </table>
+                <table width="330" cellpadding="0" cellspacing="0" style="overflow-style: auto">
+                    <tbody id="nobleFace">
+                    </tbody>
+                </table>
+                <table width="330" cellpadding="0" cellspacing="0" style="overflow-style: auto">
+                    <tbody id="identifyFace">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--点歌弹出层-->
+<div class="songBox" id="song_dialog" style="display:none">
+    <div class="songMask">
+        <em class="close" title="关闭">关闭</em>
+        <h5 class="login-head">点歌</h5>
+        <div class="overFrameContent">
+            <div class="tab">
+                <ul class="fix">
+                    <li><a href="#" class="current">编辑歌单</a></li>
+                    <li><a href="#">已点歌曲</a></li>
+                </ul>
+            </div>
+            <div class="addsong"><span>添加歌曲</span></div>
+            <div class="songList">
+                <table width="100%" cellpadding="0" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>No.</th>
+                            <th>歌曲</th>
+                            <th>原唱</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody id="songList">
+
+                    </tbody>
+                </table>
+            </div>
+            <div class="paganation">
+                <div>
+                    <a href="#">首页</a>
+                    <a href="#">上一页</a>
+                    <a href="#" class="num">1</a>
+                    <a href="#" class="num">2</a>
+                    <a href="#" class="num">3</a>
+                    <a href="#" class="num">4</a>
+                    <a href="#" class="num">5</a>
+                    <a href="#" class="num">6</a>
+                    <a href="#" class="num">7</a>
+                    <a href="#">下一页</a>
+                    <a href="#">尾页</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--车库弹出层start-->
+<div class="inviteBox"  id="garage_dialog" style="display:none">
+    <div class="carMask">
+        <h5 class="login-head">
+            <span><strong>停车场</strong>共停放了 <em class="red">0</em> 辆豪车</span>
+            <a class="buycar" href="#">购车</a>
+            <a class="help" href="#">？</a>
+            <em class="close" title="关闭">关闭</em>
+        </h5>
+        <div class="overFrameContent">
+            <img src="/app/src/img/car.jpg" width="516" height="362" />
+        </div>
+    </div>
+</div>
+<!--车库弹出层end-->

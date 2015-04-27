@@ -1,0 +1,130 @@
+.setBox {
+    width: 380px;
+    height: auto;
+    position: absolute;
+    line-height: 100%;
+    z-index: 1000;
+    margin-left: -370px;
+    top: 100px;
+}
+.setMask {
+    width: 380px;
+    height: 300px;
+    color: #666;
+    position: absolute;
+    left:200px;
+    top: 160px;
+    overflow: hidden;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    border:1px solid #d3d3d3;
+    background:#fff;
+}
+.setMask .close {
+    width: 18px;
+    height: 18px;
+    z-index: 10;
+    line-height: 100px;
+    overflow: hidden;
+    display: block;
+    cursor: pointer;
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    background:url("../img/close1.png") no-repeat 0 3px;
+}
+.setMask .overFrameContent{
+    padding:10px;
+}
+.setMask .login-head{
+    color:#333333;
+    font-size:12px;
+    height:30px;
+    line-height:30px;
+    text-indent:10px;
+    background:url("../img/login-head.png") repeat-x;
+    border-bottom:1px solid #dddddd;
+}
+.setMask .tab{
+    width:100%;
+}
+.setMask .tab ul{
+    height:30px;
+    border-bottom:1px solid #c7c7c7;
+}
+.setMask .tab ul li {
+    float:left;
+    margin-right:10px;
+    height:30px;
+    line-height:30px;
+    width:65px;
+    margin-top:-1px;
+    text-align:center;
+    background:url("../img/login-head.png") repeat-x;
+    border:1px solid #c7c7c7;
+    border-bottom:0;
+    border-top-left-radius:3px;
+    border-top-right-radius:3px;
+}
+.setMask .tab li a{
+    color:#333;
+    text-decoration: none;
+}
+.setMask .tab li.current{
+    margin-top:0;
+}
+.setMask .tab li.current a{
+    font-size:12px;
+}
+.setMask .input-text{
+    width:180px;
+    height:22px;
+    padding-left:5px;
+    border:1px solid #cacaca;
+}
+.setMask .addsong {
+    padding:5px 10px;
+}
+.setMask .addsong span {
+    font-size: 12px;
+    color: #fff;
+    width: 62px;
+    height: 25px;
+    line-height:25px;
+    text-align:center;
+    cursor: pointer;
+    border: 0;
+    display:block;
+    background:url("../img/btn/btn3.png") no-repeat 0 0;
+}
+.setMask .setList{
+    height:190px;
+    padding:10px 20px;
+    border:1px solid #cacaca;
+    border-top:0;
+}
+.setMask .setList p{
+    padding:5px 0;
+}
+.setMask .btnwrap{
+    height:30px;
+    margin-top:15px;
+}
+.setMask .btnwrap .confirm-btn{
+    color:#fff;
+    width:62px;
+    height:25px;
+    border:0;
+    cursor:pointer;
+    margin-left:80px;
+    background:url("../img/btn/btn3.png") no-repeat 0 0;
+}
+.setMask .btnwrap .cancel-btn{
+    color:#fff;
+    width:62px;
+    height:25px;
+    border:0;
+    cursor:pointer;
+    margin-left:20px;
+    background:url("../img/btn/btn5.png") no-repeat 0 0;
+}

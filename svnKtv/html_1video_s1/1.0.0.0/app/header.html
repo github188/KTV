@@ -1,0 +1,86 @@
+<!--顶部导航-->
+<div class="blackbg"></div>
+<div class="logo subnavItem" title="返回到首页" name="home"><a href="http://20229998.test.vvku.com/index.html">六间房</a><span id="roomId">房间标题文字</span></div>
+<div class="topmenu">
+    <ul>
+        <li class="navItem"><a href="http://20229998.test.vvku.com/index.html" class="one">大厅首页</a></li>
+        <li class="navItem"><a href="#">商城</a></li>
+        <li class="navItem"><a href="http://20229998.test.vvku.com/top.html">排行榜</a></li>
+    </ul>
+</div>
+<div class="userPanel" id="userPanel">
+    <ul  id="header">
+        <li class="userid navItem"><img src="../app/src/img/NetLight1.png" width="14" height="12" /><span id="userName" ></span></li>
+        <li class="userid navItem"><a href="#">大厅首页</a></li>
+        <li class="account navItem" id="m"><a href="#" class="br">账号管理 <i class="arrow"><img src="../app/src/img/scollbar/arrowDown.png" width="8" height="8" /></i></a>
+            <ul class="subnav" id="mm" style="display:none;margin-top:-7px">
+                <li name="subnavItem" id="manager" ><a href="#">账户管理</a></li>
+                <li name="subnavItem" id="safe" ><a href="#">安全中心</a></li>
+                <li name="subnavItem" id="weibo" ><a href="#">微博首页</a></li>
+                <li name="subnavItem" id="changeT" ><a href="#">修改头像</a></li>
+                <li name="subnavItem" id="changeN" ><a href="#">修改昵称</a></li>
+            </ul>
+        </li>
+        <li name="" id="status">
+            <span style="display:none" id="changeUser"  class="status"><a  href="#">切换账号</a></span>
+            <span style="display:none" id="login"  class="status"><a href="#">登录</a></span>
+            <span style="display:none" id="register"  class="status"><a href="#">注册</a></span>
+        </li>
+    </ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+<div id="logon" class="loginBox" style="display:none">
+    <div class="loginMask">
+        <em class="close" title="关闭">关闭</em>
+        <h5 class="login-head">立即登录，您就可以与主播聊天互动了</h5>
+        <div class="overFrameContent">
+            <div class="side">
+                <p>
+                    <span>使用QQ登录，直接分享动态到空间。</span>
+                    <span class="partner">
+                        <a href="#" class="loginWith loginWith-qq btn" title="使用QQ登录"></a>
+                    </span>
+                </p>
+            </div>
+            <div class="vlogin">
+                <dl>
+                    <dd class="ddusr fix">
+                        <label>
+                            <span>通行证：</span>
+                        </label>
+                        <div class="input">
+                            <input type="text" id="login_username"name="username" class="input-text" />
+                        </div>
+                    </dd>
+                    <dd class="ddpsw fix">
+                        <label>
+                            <span>密码：</span>
+                        </label>
+                        <div class="input">
+                            <input type="password" id="login_passWd" name="passwd" class="input-text" />
+                        </div>
+                    </dd>
+                    <dd class="loginbtn fix">
+                        <input type="button" id="btn_log" value="登录" class="loogerbtn btn" />
+                        <label><input type="checkbox" checked="checked" />下次自动登录</label>
+                    </dd>
+                    <dt class="protocol fix">
+                        <a id="btn_gus"  href="#" class="btn">游客登录</a>
+                        <a id="btn_reg"  href="#"class="btn">立即注册</a>
+                        <a id="btn_forgot" class="gray btn" href="#" >忘记密码？</a>
+                    </dt>
+                </dl>
+            </div>
+            <div class="middle"><i></i></div>
+        </div>
+    </div>
+</div>

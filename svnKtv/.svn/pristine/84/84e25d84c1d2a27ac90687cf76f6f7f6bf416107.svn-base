@@ -1,0 +1,411 @@
+/**
+ * Created with JetBrains WebStorm.
+ * User: Administrator
+ * Date: 14-1-9
+ * Time: 下午2:07
+ * To change this template use File | Settings | File Templates.
+ */
+define(function(require, exports, module){
+    function Role(data) {
+        this.options= {};
+        this.roleType="user";
+        this.ADD = false;
+        this.user = [];
+        this.myType="0";
+        this.myId=data.uin||data.Uin;
+        this.managerOrNot=false;
+        this.manager =[];
+        this.length=0;
+        this.managerLength=0;
+        //this.tabTmpl = '<li class=""><a href="#" class="roleType" id="${text}"><em>${text}</em><span>${number}</span></a></li>';
+        this.listTmpl ='<li class="fix" id="${uin}" name="${nick}" gender="${gender}" pic="${pic}">'+
+            '<img src="${pic}" width="40" height="40" alt="${nick}"  title="${nick}"/>'+
+            '<p><a href="#" class="clickUser">${nick}</a></p>'+
+            '<p id="post${uin}" level="荣誉等级">'+
+            '</p>'+
+            '</li>';
+        this.managerListTmpl ='<li class="fix" id="${uin}" name="${nick}" gender="${gender}" pic="${pic}">'+
+            '<img src="${pic}" width="40" height="40" alt="${nick}"  title="${nick}"/>'+
+            '<p><a href="#" class="clickUser">${nick}</a></p>'+
+            '<p id="manager${uin}" level="荣誉等级">'+
+            '</p>'+
+            '</li>';
+        this.postTmpl = '<a style="padding:0 0px;" href="#" title="${name}"><img src="${role_small_icon}"  height="18" /></a>';
+        this.init();
+        this.managerDeal();
+        this.initLiClick();
+        this.findMyself();
+    }
+    Role.prototype.findMyself=function(){
+        var self = this,el;
+        $("#btn_find_myself").click(function(){
+            $("#"+self.myId).addClass("currentRole").siblings().removeClass("currentRole") ;
+            testInterface.callRoomView({key:"dealAndChat",value:{id:self.myId ,name:$("#"+self.myId).attr("name")}});
+        });
+        $("#btn_search_someone").click(function(){
+            var someone= $("#someone").val();
+            if("" == someone){
+                alert("请输入查询人的昵称");
+            }else{
+                switch(self.roleType){
+                    case "user":
+                        el = "#userList";
+                        break;
+                    default:
+                        el ="#managerList"
+                }
+                $("#"+someone,el).addClass("currentRole").siblings().removeClass("currentRole") ;
+                testInterface.callRoomView({key:"dealAndChat",value:{id:$("#"+someone,el).attr("id") ,name:$("#"+someone,el).attr("name")}});
+            }
+        });
+    }
+    Role.prototype.init=function(){
+        var self = this;
+        $("#roleTab").find("li").click(function(){
+            $(this).addClass("on").siblings().removeClass("on");
+            self.roleType= $(this).attr("id");
+            var $type = $("#"+self.roleType+"List"), $li = $type.find("li");
+            if($li.length<0){
+                //self.callBack(self.roleType);
+            }
+            $type.show().siblings().hide();
+        });
+    }
+    Role.prototype.resetUserList=function(data){
+        var roles,add = data.op;
+        switch(add){
+            case "ADD":
+                if(this.ADD){
+                    this.length+=1;
+                    roles = data.user;
+                    this.user.push(roles);
+                    this.userIn(roles);
+                }
+                break;
+            case "MOD":
+                //roles = data.user;
+                break;
+            case "DEL":
+                roles = data.uin;
+                this.userOut(roles);
+                break;
+            default:
+                roles = data.list;
+                this.user = roles;
+                this.renderList(roles);
+                this.ADD =true;
+                break;
+        }
+        if(!!roles){
+            //this.renderList(roles);
+        }
+    }
+    Role.prototype.setMyId =function(id){
+            this.myId = id;
+    }
+    Role.prototype.renderList= function(roles){
+        this.length=roles.length
+        var self=this,type=this.roleType;
+        $("#"+type+"Num").text(this.length);
+        var $list =$("#"+type+"List");
+        this.notTemplateInfo ($list,roles,"-1","render","post");
+        this.renderPost(roles,"render","post");
+        self.myType = "0";
+        $(roles).each(function(i){
+            var data = roles[i];
+            if(data["uin"] == self.myId){
+                var myInfo = data,roleInfo = myInfo["roles_info"],type;
+                $(roleInfo).each(function(i){
+                    type = roleInfo[i]["admin_type"];
+                    if("1" == type){
+                       self.myType = "1";
+                    }
+                });
+                testInterface.callOther(self.myType);
+                header.resetMyInfoDiv(myInfo);
+                chatRoom.welcome(myInfo);
+                //return;
+            }
+        });
+        //this.initLiClick();
+    }
+    Role.prototype.notTemplateInfo=function($list,data,lNum,add,info){
+        var self = this,html="";
+        if("ADD" == add || "manager" == info){
+             html = this.notTemplateInfoNext(data,info);
+             $list.append(html);
+        }else{
+            $(data).each(function(i){
+                var result = data[i];
+                html+= self.notTemplateInfoNext(result,info);
+            });
+            $list.html(html);
+        }
+    }
+    Role.prototype.notTemplateInfoNext=function(data,info){
+        var result = data,uin=result["uin"],nick=result["nick"],pic=result["pic"],html="";
+        html+='<li class="fix rolesClick" id="'+ uin +'" name="'+ nick +'" gender="${gender}" pic="'+ pic +'">'+
+            '<img src="'+ pic +'" width="40" height="40" alt="'+ nick +'"  title="'+ nick +'"/>'+
+            '<p><a href="#" class="clickUser">'+ nick +'</a></p>'+
+            '<p id="'+ info + uin +'" level="荣誉等级">'+
+            '</p>'+
+            '</li>';
+        return html;
+    }
+    Role.prototype.renderPost=function(data,flag,info){
+        var self = this;
+        if("ADD" == flag){
+            self.managerOrNot = false;
+            this.renderNext(data,info);
+        }else{
+            $(data).each(function(i){
+                self.renderNext(data[i],info);
+            });
+        }
+        if("post" == info){
+            console.log(self.managerOrNot);
+            if(self.managerOrNot){
+                self.renderManagerList(self.manager);
+            }
+        }
+    }
+    Role.prototype.renderNext = function(data,info){
+      var self=this,roleInfo,lNum="";
+        lNum = data["lnum"];
+        var $list =$("#"+info+data.uin);
+        if(typeof(lNum) == "undefined"){
+            lNum = "-1";
+        }
+        roleInfo = data.roles_info;
+        self.notTemplatePost ($list,roleInfo,lNum,data,info);
+        self.userInfoHover();
+    }
+    Role.prototype.notTemplatePost=function($list,data,lNum,manager,flag){
+        var self=this,html="";
+        $(data).each(function(i){
+            var result = data[i],title=result["name"],pic=result["role_small_icon"],type = result["admin_type"];
+            if("1" == type && "manager"!=flag){
+                self.managerOrNot = true;
+                self.manager.push(manager);
+            }
+            html+='<a style="padding:0 0px;" href="#" title="'+ title +'"><img height="18" src="'+ pic +'"/></a>';
+        });
+        if("-1" != lNum){
+            html+= '<a href="#" title="靓号" color="red">'+ lNum +'</a>';
+        }
+        $list.append(html);
+    }
+    Role.prototype.renderManagerList=function(arry){
+           var self=this,result= $.unique(arry),data;
+           this.managerLength = result.length;
+           $("#managerNum").text(result.length);
+            $(result).each(function(i){
+                data=result[i];
+                self.notTemplateInfo($("#managerList"),data,data["lnum"]||"-1","render","manager");
+            });
+          self.renderPost(result,"render","manager");
+    }
+    Role.prototype.renderManagerListPost=function(data){
+        var self=this,roleInfo,lNum="";
+        $(data).each(function(i){
+            lNum = data[i]["lnum"];
+            roleInfo = data[i].roles_info;
+            var $list =$("#manager"+data[i].uin);
+            if(typeof(lNum) == "undefined"){
+                lNum = "-1";
+            }
+            self.template ($list,self.postTmpl,roleInfo,lNum);
+            self.userInfoHover();
+        });
+    }
+    /*Role.prototype.renderManagerList=function(data){
+
+        this.template ($list,this.managerListTmpl,data,"-1");
+        this.renderManagerListPost(data);
+
+    }*/
+    Role.prototype.renderOtherInfoDiv=function(name,id,lNum,genderText,pic,level){
+        $("#otherInfoDiv").empty();
+        var html =  '<p class="blue">'+ name +'</p>'+
+            '<p>用户码：'+ id +'</p>'+
+            '<p>靓号：'+ lNum +'</p>'+
+            '<p>性别：'+ genderText +'</p>'+
+            '<p>生日：保密</p>';
+        $("#otherInfoDiv").append(html);
+        $("#otherInfoImg").attr("src",pic);
+        $("#level").html(level);
+    }
+    Role.prototype.userInfoHover=function(){
+        var self=this,flag=false;
+        var $info =  $("#otherPeopleInfo");
+        $("#userList").find("li").mouseover (function(){
+            var offset = $(this).offset (),top=offset.top-258,left=offset.left-1849;
+            $info.attr("style","margin-top:"+top+"px;"+"margin-left:"+left+"px");
+            var id=$(this).attr("id"),name=$(this).attr("name"),gender=$(this).attr("gender"),genderText="";
+            var lNum = $(this).find("a[title='靓号']").text(),pic=$(this).attr("pic"),level=$(this).find("p[level='荣誉等级']").html();
+            if(lNum ==""){
+                lNum = "无";
+            }
+            if("0" == gender){
+                genderText = "女";
+            }else{
+                genderText = "男";
+            }
+            self.renderOtherInfoDiv(name,id,lNum,genderText,pic,level);
+            if(managerOrInfo){
+                $info.hide();
+            }else{
+                $info.show();
+            };
+        }).mouseleave (function(){
+            $info.hide();
+        });
+        $("#managerList").find("li").mouseover (function(){
+            var offset = $(this).offset (),top=offset.top-258,left=offset.left-1849;
+            $info.attr("style","margin-top:"+top+"px;"+"margin-left:"+left+"px");
+            var id=$(this).attr("id"),name=$(this).attr("name"),gender=$(this).attr("gender"),genderText="";
+            var lNum = $(this).find("a[title='靓号']").text(),pic=$(this).attr("pic"),level=$(this).find("p[level='荣誉等级']").html();
+            if("0" == gender){
+                genderText = "女";
+            }else{
+                genderText = "男";
+            }
+            self.renderOtherInfoDiv(name,id,lNum,genderText,pic,level);
+            if(managerOrInfo){
+                $info.hide();
+            }else{
+                $info.show();
+            };
+        }).mouseleave (function(){
+            $info.hide();
+        });
+        $info.mouseover (function(){
+            $info.show();
+            flag = true;
+        }).mouseleave (function(){
+            $info.hide();
+            flag = false;
+        });
+        $("#rolePanel").mouseleave (function(){
+            if(flag){
+                $info.show();
+            }else{
+                $info.hide();
+            }
+        });
+    }
+    Role.prototype.renderAdd=function(data){
+        var self=this,roleInfo,lNum,userType="0";
+            roleInfo = data.roles_info;
+        $(roleInfo).each(function(i){
+            var type = roleInfo[i]["admin_type"];
+            if("1" == type){
+                userType = "1";
+            }
+        });
+        lNum = data["lnum"];
+        if(typeof(lNum) == "undefined" ){
+            lNum = "-1";
+        }
+        if("1" == userType){
+            this.managerLength+=1;
+            var $managerList=$("#managerList");
+            $("#managerNum").text(this.managerLength);
+            this.notTemplateManager($managerList,data,lNum,"ADD")
+            this.renderPost(data);
+        }
+    }
+    Role.prototype.initLiClick=function(){
+        var self = this,$managerRoot = $("#managerRoot");
+        $("#rolePanel").delegate(".rolesClick","click",function(){
+            $(this).addClass("currentRole").siblings().removeClass("currentRole");
+            testInterface.callRoomView({key:"dealAndChat",value:{id: $(this).attr("id"),name:$(this).attr("name")}});
+        });
+        $("#rolePanel").delegate(".clickUser","click",function(){
+            var desUin = $(this).parent().parent().attr("id");
+            if("0" == this.myType){
+                return;
+            }else{
+                require("../../app/src/css/manager.css");
+                $("#otherPeopleInfo").hide();
+                var offset = $(this).parent().offset (),top=offset.top-158,left=offset.left-1540;
+                $managerRoot.attr("style","margin-top:"+top+"px;"+"margin-left:"+left+"px");
+                $managerRoot.attr("name",desUin);
+                managerOrInfo = true;
+                $managerRoot.show();
+                $managerRoot.mouseleave (function(){
+                    $(this).hide();
+                    managerOrInfo = false ;
+                });
+            }
+        });
+    }
+
+    Role.prototype.managerDeal=function(){
+        $("#managerDealWhat","#managerRoot").find("li").click(function(){
+            var id = $(this).attr("id"),pkt={},desUin=$("#managerRoot").attr("name");
+            pkt.desuin = desUin;
+            switch(id){
+                case "MAINVIDEO_UP":
+                    pkt.cmd = "MAINVIDEO";
+                    pkt.op = "UP";
+                    break;
+                case "MAINVIDEO_DOWN":
+                    pkt.cmd = "MAINVIDEO";
+                    pkt.op = "DOWN";
+                    break;
+                case "MAINVIDEO_TOP":
+                    pkt.cmd = "MAINVIDEO";
+                    pkt.op = "TOP";
+                    break;
+                case "MAINVIDEO_DEL":
+                    pkt.cmd = "MAINVIDEO";
+                    pkt.op = "DEL";
+                    break;
+                default:
+                    pkt.cmd = id;
+                    break;
+            }
+            $("#managerRoot").hide();
+            testInterface.myManagerDeal(pkt);
+        });
+    }
+    Role.prototype.template=function($list,tmpl,data,lNum){
+        var html="";
+        $.template("string",tmpl);
+        $list.html($.tmpl("string", data));
+        if("-1" != lNum){
+            html = '<a href="#" title="靓号" color="red">'+ lNum +'</a>';
+        }
+        $list.append(html);
+    }
+    Role.prototype.userOut=function(id){
+        var self =this,currentList = self.options.data;
+        if($("#"+id,"#userList").children().length>0){
+            $("#"+id,"#userList").remove();
+            this.length-=1;
+            $("#userNum").text(this.length);
+        }
+        if($("#"+id,"#managerList").children().length>0){
+            $("#"+id,"#managerList").remove();
+            this.managerLength-=1;
+            $("#managerNum").text(this.managerLength);
+        }
+
+        $("#"+id,"#managerList").remove();
+    }
+    Role.prototype.callChatRoom=function(data){
+        chatRoom.welcome(data,"other");
+    }
+    Role.prototype.userIn=function(data){
+       var $userList=$("#userList");
+        $("#userNum").text(this.length);
+        var lNum=data["lnum"];
+        this.notTemplateInfo($userList,data,lNum||"-1","ADD","post");
+        this.renderPost(data,"ADD","post");
+        //this.renderAdd(data);
+        this.callChatRoom(data);
+    }
+    module.exports = Role;
+});
+

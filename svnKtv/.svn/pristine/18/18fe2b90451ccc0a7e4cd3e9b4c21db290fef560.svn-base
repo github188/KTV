@@ -1,0 +1,19 @@
+<!--顶部导航-->
+<!DOCTYPE html>
+<html class="ng-app:USER" ng-app="USER" id="ng-app">
+<head>
+  .mine{
+
+    }
+</head>
+<body>
+    <div class="head">
+        <ul>
+            <li>大厅首页 |</li>
+            <li>帐号管理 |</li>
+            <li>我要去 |</li>
+            <li>切换账号 |</li>
+        </ul>
+    </div>
+</body>
+</html>

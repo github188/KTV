@@ -1,0 +1,120 @@
+<!--尾部导航-->
+<ul id="footer">
+    <li class="foot" id="foot_manage"><a href="#" class="item manage"></a><p><a href="#">管理</a></p></li>
+    <li class="foot" id="foot_set"><a href="#" class="item set"></a><p><a href="#">设置</a></p></li>
+    <li  class="foot" id="foot_broadcast"><a href="#" class="item broadcast"></a><p><a href="#">广播</a></p></li>
+    <li class="foot" id="foot_invite"><a href="#" class="item invite"></a><p><a href="#">邀请</a></p></li>
+</ul>
+
+<!--- 设置 弹出窗start -->
+<div id="foot_set_dialog" class="setBox" style="display: none;margin-left:-800px;margin-top:40px">
+    <div class="setMask">
+        <em class="close" title="关闭">关闭</em>
+        <h5 class="login-head">系统设置</h5>
+        <div class="overFrameContent">
+            <div class="tab">
+                <ul class="fix">
+                    <li  class="setType current" name="micAndCam"><a href="#">音频</a></li>
+                    <li  class="setType" name="teX"><a href="#">特效</a></li>
+                </ul>
+            </div>
+            <div>
+                <div id="micAndCam" class="setList">
+                    <p>音频驱动：</p>
+                    <select name="" style="width:300px;" id="micListAll">
+                    </select>
+                    <p>摄像头：</p>
+                    <select name="" style="width:300px;"id="camListAll">
+                    </select>
+                    <p><input id="isHDOrNot" type="checkbox" value="" /><span>使用高清插件</span></p>
+                    <div class="btnwrap">
+                        <input type="button"  class="confirm-btn" id="btn_ca_sure"  value="确定"/>
+                        <input type="button"  class="cancel-btn" id="btn_ca_cancel"  value="取消"/>
+                    </div>
+                </div>
+                <div id="teX" class="setList" style="display:none">
+                    <p>礼物特效：</p>
+                    <select name="" style="width:300px;" id="giftT">
+                        <option value="0">高级特效(开启所有动画特效)</option>
+                        <option value="1">初级特效(只显示最后一帧特效)</option>
+                        <option value="-1">关闭特效</option>
+                    </select>
+                    <p>进场特效：</p>
+                    <select name="" style="width:300px;"id="userInT">
+                        <option value="0">高级特效(开启所有动画特效)</option>
+                        <option value="1">初级特效(只显示最后一帧特效)</option>
+                        <option value="-1">关闭特效</option>
+                    </select>
+                    <div class="btnwrap">
+                        <input type="button"  class="confirm-btn"  id="btn_te_sure" value="确定"/>
+                        <input type="button"  class="cancel-btn" id="btn_te_cancel" value="取消"/>
+                    </div>
+                </div>
+           </div>
+        </div>
+    </div>
+</div>
+<!--- 设置 弹出窗end -->
+<!--- 广播 弹出窗start -->
+<div id="foot_broadcast_dialog" class="brBox" style="display: none;margin-left:-800px;margin-top:40px">
+        <div class="brMask">
+            <em class="close" title="关闭">关闭</em>
+            <h5 class="br-head">发布广播</h5>
+            <div class="overFrameContent">
+                <p><input name="broadType" type="radio" value="horn"  checked="checked"/><span>房间喇叭（<span class="red">10</span>金币/条）</span></p>
+                <p><input name="broadType" type="radio" value="cast" /><span>全站广播（<span class="red">100</span>金币/条）</span></p>
+                <div class="message">
+                    <p>输入内容：</p>
+                    <div class="message-box">
+                        <div class="head">
+                            <a href="#" class="color"></a>
+                            <select class="size">
+                                <option>12号</option>
+                                <option>14号</option>
+                            </select>
+                            <a href="#" class="bold"></a>
+                            <a href="#" class="underline"></a>
+                        </div>
+                        <textarea name="textArea" id="textArea"cols="48" rows="3" style="width:96.5%;height:59.5%"></textarea>
+                    </div>
+                </div>
+                <p>已输入<span class="red">0</span>个字，还可以输入<span class="red">50</span>个字</p>
+                <div class="btnwrap">
+                    <input type="button"  class="confirm-btn" id="btn_publish" value="发布"/>
+                    <input type="button"  class="cancel-btn" id="btn_cancel" value="取消"/>
+                </div>
+            </div>
+        </div>
+</div>
+<!--- 广播 弹出窗end -->
+<!--- 邀请 弹出窗start -->
+<div id="foot_invite_dialog" class="inviteBox" style="display: none;margin-left:-800px;margin-top:40px">
+    <div class="inviteMask">
+        <em class="close" title="关闭">关闭</em>
+        <h5 class="login-head">邀请好友</h5>
+        <div class="overFrameContent">
+            <p>分享给站外好友</p>
+            <div class="link-address fix">
+                <span>链接地址：</span>
+                <textarea name="" cols="45" rows="3">视频直播-互动交友-游戏娱乐，快来看看吧！http://20189331.optest.vvku.com/v/5880208</textarea>
+                <a href="#" class="btn">复制链接</a>
+            </div>
+            </br>
+            </br></br>
+            <div class="bdsharebuttonbox">
+                <div class="bdsharebuttonbox share">
+                    <a href="#" class="bds_more" data-cmd="more">分享到：</a>
+                    <a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间">QQ空间</a>
+                    <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博">新浪微博</a>
+                    <a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博">腾讯微博</a>
+                    <a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网">人人网</a>
+                    <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信">微信</a>
+                    <a href="#" class="bds_tqf" data-cmd="tqf" title="分享到腾讯朋友">腾讯朋友</a>
+                    <a href="#" class="bds_kaixin001" data-cmd="kaixin001" title="分享到开心网">开心网</a>
+                    <a href="#" class="bds_douban" data-cmd="douban" title="分享到豆瓣网">豆瓣网</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--- 邀请 弹出窗end -->

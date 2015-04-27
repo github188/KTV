@@ -1,0 +1,218 @@
+var ad_core,ad_video;
+var bLoginSucess = false;
+var isHD = false;
+var mic = "0";
+var cam = "0";
+var giftT = "0";
+var userInT = "0";
+var mainVideoUin = null;
+var manage1VideoUin = null;
+var manage2VideoUin = null;
+/*var session = "03F6DA3E4F7716B2F3BE2142A691D800";
+var uin = "20226538";*/
+var testInterface = new testInterface();
+var myId="";
+var myInfo = null;
+var myType = "0";
+var managerOrInfo = false;
+//alert(2)
+//房间视图层伪类对象
+function roomView() {
+    this.name="room";
+      //this.session="03F6DA3E4F7716B2F3BE2142A691D800";;
+     // this.selfUin= "20226538";;
+}
+roomView.prototype.callBack=function(data){
+    switch(data.key){
+        case "dealAndChat" :
+            deal.setSendTo(data.value);
+            chatRoom.resetReceiver(data.value);
+            break;
+        case "diceSet" :
+            chatRoom.diceSet(data.value);
+            break;
+        default:
+            break;
+    }
+}
+/**
+ * 表情/印章数据
+ * @param data
+ */
+roomView.prototype.chatFacesOrSeal=function(data){
+    if("100" == data.Flag){
+        chatRoom.roomViewCallChatRoom(data);
+    }else{
+        alert("网络连接错误");
+    }
+}
+roomView.prototype.callNick=function(data){
+    if("100" == data.Flag){
+        header.roomViewCallHeader();
+    }else{
+        alert("网络连接出错");
+    }
+}
+
+/**
+ *
+ * @param data
+ */
+roomView.prototype.callHost=function(data){
+    host.callBack(data);
+}
+/**
+ * 礼物列表
+ * @param data
+ */
+roomView.prototype.initGiftList=function(data){
+    var self =this;
+    if("100" == data.Flag){
+        var giftList = data.Result;
+        $.each(giftList ,function(k,v){
+            deal.resetGiftList(k,v);
+        });
+    }
+}
+/**
+ *
+ * 登录模块
+ * @param data 用户数据
+ * @constructor
+ */
+roomView.prototype.OnLoginReqCallBack=function(data){
+    if(data && data.Flag == 100) {
+        bLoginSucess = true;
+        testInterface.selfUin = data.Uin;
+        testInterface.session = data.Token;
+        //是否已经收藏房间
+        testInterface.ReqGetCollectRoom();
+        header.resetBase (data);
+        role.setMyId(data.uin||data.Uin);
+        chatRoom.setMyId(data.uin||data.Uin);
+        showInfo.callUserChange(true);
+        testInterface.Login(loginUrl,testInterface.selfUin ,testInterface.session ,roomId,"",groupId);
+    } else {
+        alert("你输入的密码或账号错误");
+        return;
+    }
+
+}
+roomView.prototype.diceSetOrChatSet=function(data){
+    var op = data.op;
+    switch(op){
+        case "SET" :
+            header.setDice(data);
+            chatRoom.initDiceSet(data);
+            break;
+        default:
+            chatRoom.resetChat(data,"dice");
+            break;
+    }
+}
+roomView.prototype.indexToHome=function(){
+    if("" == uin){
+        bLoginSucess = false;
+    }
+    if(testInterface.session == session){
+        return;
+    }else{
+        testInterface.selfUin =uin;
+        testInterface.session =session;
+    }
+    testInterface.Login(loginUrl,testInterface.selfUin ,testInterface.session  , roomId,"", groupId);
+
+}
+/**
+ * view层数据渲染接口
+ * @param data
+ */
+roomView.prototype.render=function(data){
+    var key = data.cmd;
+    switch(key){
+        case "CHAT_TEXT" :
+            chatRoom.resetChat(data,key);
+            break;
+        case "CMD_COLOURBAR" :
+            chatRoom .resetChat(data,key);
+            break;
+        case "CMD_PARKINGINFO" :
+            chatRoom.resetGarage(data);
+            break;
+        case "STAMP" :
+            console.log(data);
+           // chatRoom.resetChat(data,"STAMP");
+            break;
+        case "CMD_GATE_NAME" :
+            break;
+        case "SEND_ROOMINFO" :
+           // host.resetRoomInfo (data);
+            break;
+        case "CMD_ACTORINFO" :
+            console.log(data);
+            host.resetRoomInfo (data);
+            break;
+        case "SEND_SVRADDRINFO" :
+            flashPlayer.initParam(data);
+            break;
+        case "USERLIST" :
+            role.resetUserList (data);
+            break;
+        case "MAINVIDEO" :
+            host.isOnline(data);
+            flashPlayer.reSetMainVideo(data);
+            break;
+        case "SMALLVIDEO" :
+            //console.log(data);
+            break;
+        case "CMD_DICE" :
+            this.diceSetOrChatSet(data);
+            break;
+        case "CMD_KMONEY" :
+            deal.userMoney(data);
+            break;
+        case "CMD_MOD" :
+            chatRoom.setMod(data.msg);
+            break;
+        case "CMD_ROOM_RANK_LIST" :
+            rank.resetRankList(data);
+            break;
+        case "CMD_POPULAR" :
+            break;
+        case "CMD_ROOMINFO" :
+            guard.resetGuardList(data);
+            break;
+        case "HORN" :
+            chatRoom.resetChat(data.data,"horn");
+            break;
+        case "BROADCAST" :
+            notice .resetNotice(data.data);
+            break;
+        case "SELF_SYSMSG" :
+            chatRoom .resetChat(data.arr,key);
+            break;
+        case "SELF_SYSMSG_BroadCast" :
+            showInfo .resetInfo(data.arr);
+            break;
+        default:
+            break;
+    }
+}
+function load(){
+    ad_core = swfobject.getObjectById("ad_core");
+    if(!ad_core){
+        alert("err");
+        return;
+    }
+    ad_core.flash_InitCore();
+    //请求礼物列表
+    testInterface.ReqGiftList();
+    //加载后调用，查询数据
+    testInterface.view.indexToHome();
+    //表情列表
+    testInterface.ReqEmotionList();
+    //获取印章
+    testInterface.ReqStampList();
+}
+
+

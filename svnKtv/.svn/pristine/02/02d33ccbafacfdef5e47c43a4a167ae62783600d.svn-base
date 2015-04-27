@@ -1,0 +1,5 @@
+SCMBranch=rtmp
+SCMRepository=rtmp/windows/flash/RTMPPublishPlayManager/testRtmpMediaForHtml/src
+CheckMedia.as;1945524411;1;1395024837;
+CheckMediaEvent.as;1058003422;1;1395024837;
+vvMedia.mxml;3381392104;6;1395026280;

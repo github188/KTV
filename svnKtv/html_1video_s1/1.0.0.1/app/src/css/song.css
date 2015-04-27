@@ -1,0 +1,121 @@
+.clears:before,.clears:after {content:'';display:table;}
+.clears:after {clear:both;}
+.clears {*zoom:1;}
+.songBox {
+    width: 380px;
+    height: auto;
+    position: absolute;
+    line-height: 100%;
+    z-index: 1000;
+    left: 50%;
+    margin-left: -370px;
+    top: 100px;
+}
+.songMask {
+    width: 380px;
+    height: 300px;
+    color: #666;
+    position: absolute;
+    left: 150px;
+    top: 80px;
+    overflow: hidden;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    border:1px solid #d3d3d3;
+    background:#fff;
+}
+.songMask .close {
+    width: 18px;
+    height: 18px;
+    z-index: 10;
+    line-height: 100px;
+    overflow: hidden;
+    display: block;
+    cursor: pointer;
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    background:url("../img/close1.png") no-repeat 0 3px;
+}
+.songMask .login-head{
+    color:#333333;
+    font-size:14px;
+    height:30px;
+    line-height:30px;
+    text-indent:10px;
+    background:url("../img/login-head.png") repeat-x;
+    border-bottom:1px solid #dddddd;
+}
+.songMask .overFrameContent .tab{
+    padding:10px;
+    width:100%;
+}
+.songMask .overFrameContent .tab li {
+    float:left;
+    margin-right:10px;
+}
+.songMask .overFrameContent .tab li a{
+    color:#8e8e8e;
+}
+.songMask .overFrameContent .tab li a.current{
+    font-size:14px;
+    font-weight:bold;
+    color:#ee3f5e;
+}
+.songMask .overFrameContent .input-text{
+    width:180px;
+    height:22px;
+    padding-left:5px;
+    border:1px solid #cacaca;
+}
+.songMask .overFrameContent .addsong {
+    padding:5px 10px;
+}
+.songMask .overFrameContent .addsong span {
+    font-size: 12px;
+    color: #fff;
+    width: 62px;
+    height: 25px;
+    line-height:25px;
+    text-align:center;
+    cursor: pointer;
+    border: 0;
+    display:block;
+    background:url("../img/btn/btn3.png") no-repeat 0 0;
+}
+.songMask .songList table{
+    margin:0 10px ;
+}
+.songMask .songList table th{
+    color:#8e8e8e;
+    font-weight:normal;
+    height:24px;
+    line-height:24px;
+}
+.songMask .songList table td{
+    text-align:center;
+    height:24px;
+    line-height:24px;
+}
+.songMask .songList table .blue{
+    color:#4b8c01;
+}
+.paganation div{
+    margin:20px auto;
+    width:320px;
+    overflow:visible;
+}
+.paganation div a{
+    font-size:12px;
+    height:20px;
+    line-height:20px;
+    color:#8e8e8e;
+    float:left;
+    margin:0 10px;
+}
+.paganation div a:hover{
+    text-decoration:underline;
+}
+.paganation div a.num{
+    margin:0 5px;
+}

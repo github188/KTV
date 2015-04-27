@@ -1,0 +1,116 @@
+.brBox {
+    width: 368px;
+    height: auto;
+    position: absolute;
+    line-height: 100%;
+    z-index: 1000;
+    left: 50%;
+    margin-left: -370px;
+    top: 100px;
+}
+.brMask {
+    width: 368px;
+    height: 300px;
+    color: #666;
+    position: absolute;
+    left: 0;
+    top: 0;
+    overflow: hidden;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    border:1px solid #d3d3d3;
+    background:#fff;
+}
+.brMask .close {
+    width: 18px;
+    height: 18px;
+    z-index: 10;
+    line-height: 100px;
+    overflow: hidden;
+    display: block;
+    cursor: pointer;
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    background:url("../img/close1.png") no-repeat 0 3px;
+}
+.brMask .br-head{
+    color:#333333;
+    font-size:14px;
+    height:30px;
+    line-height:30px;
+    text-indent:10px;
+    background:url("../img/login-head.png") repeat-x;
+    border-bottom:1px solid #dddddd;
+}
+.brMask .overFrameContent{
+    padding:10px 20px;
+}
+.brMask .red{
+    color:#ee3f5e;
+}
+.brMask p{
+    padding:5px 0;
+}
+.brMask p span{
+    color:#999;
+}
+.brMask .message p{
+    margin-top:10px;
+}
+.brMask .message .message-box{
+    width:324px;
+    height:100px;
+    border:1px solid #999;
+}
+.brMask .message .message-box .head{
+    height:25px;
+    padding:3px;
+    background:#999;
+}
+.brMask .message .message-box .head a{
+    width:20px;
+    height:20px;
+    float:left;
+    margin:2px 0 0 4px;
+}
+.brMask .message .message-box .head .color{
+    background:url("../img/icon1a.png");
+}
+.brMask .message .message-box .head .size{
+    float:left;
+}
+.brMask .message .message-box .head .bold{
+    background:url("../img/icon2a.png");
+}
+.brMask .message .message-box .head .bold:hover{
+    background:url("../img/icon2b.png");
+}
+.brMask .message .message-box .head .underline{
+    background:url("../img/icon4a.png");
+}
+.brMask .message .message-box .head .underline:hover{
+    background:url("../img/icon4b.png");
+}
+.brMask .btnwrap{
+    height:30px;
+    margin-top:15px;
+}
+.brMask .btnwrap .confirm-btn{
+    color:#fff;
+    width:62px;
+    height:25px;
+    border:0;
+    cursor:pointer;
+    margin-left:100px;
+    background:url("../img/btn/btn3.png") no-repeat 0 0;
+}
+.brMask .btnwrap .cancel-btn{
+    color:#fff;
+    width:62px;
+    height:25px;
+    border:0;
+    cursor:pointer;
+    margin-left:20px;
+    background:url("../img/btn/btn5.png") no-repeat 0 0;
+}

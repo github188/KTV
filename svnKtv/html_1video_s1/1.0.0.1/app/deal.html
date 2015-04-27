@@ -1,0 +1,85 @@
+<!--送礼物，道具-->
+<ul class="gift-tab fix dealType">
+    <li name="gift" class="on"><a href="#tabs-1" hidefocus="true" class="gift-icon">礼物</a></li>
+    <li name="prop"><a href="#tabs-2" hidefocus="true" class="prop-icon">道具</a></li>
+    <li name="game"><a href="#tabs-3" hidefocus="true" class="game-icon">游戏</a></li>
+</ul>
+<div id="tabDivs">
+    <!--礼物-->
+    <div class="gift-body" style="display:block;height: 190px;" id="tabs-gift">
+        <div class="gift-child-tab">
+            <ul class="fix" id="labels">
+
+            </ul>
+        </div>
+        <div class="gift-child-body">
+            <div  style="display:block;height: 140px;overflow: auto;" id="list-gift"  class="send">
+                <ul class="fix" id="list-gift-primary">
+
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!--道具-->
+    <div class="gift-body" style="display:none;" id="tabs-prop">
+        <div class="gift-child-body">
+            <div  style="display:block;height: 190px;overflow: auto;" class="send">
+                <ul class="fix" id="list-prop-primary">
+
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!--游戏-->
+    <div class="gift-body" style="display:none;" id="tabs-game">
+        <div class="gift-child-body">
+            <div  style="display:block;height: 190px;overflow: auto;" class="send">
+                <ul class="fix" id="list-game-primary">
+
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="present-box">
+    <div class="g-num" id="sendNum">
+        <em>数量</em>
+        <input type="text" class="input-text" id="insertNum"/>
+        <a class="shape" href="#">图形</a>
+        <div class="gift-shapebox" style="display:none">
+            <ul class="giftlist">
+                <li title="50"><a href="#"><img src="./app/src/img/love/v.jpg" width="45" height="24" />V(50个)</a></li>
+                <li title="99"><a href="#"><img src="./app/src/img/love/xin.jpg " width="45" height="24" />心(99个)</a></li>
+                <li title="100"><a href="#"><img src="./app/src/img/love/xiaolian.jpg " width="45" height="24" />笑脸(100个)</a></li>
+                <li title="300"><a href="#"><img src="./app/src/img/love/love.jpg " width="45" height="24" />LOVE(300个)</a></li>
+                <li title="520"><a href="#"><img src="./app/src/img/love/aizhijian.jpg" width="45" height="24" />爱之箭(520个)</a></li>
+                <li title="999"><a href="#"><img src="./app/src/img/love/biyi.jpg " width="45" height="24" />比翼双飞(999个)</a></li>
+                <li title="1314"><a href="#"><img src="./app/src/img/love/yisheng.jpg " width="45" height="24" />一生一世(1314个)</a></li>
+                <li title="3344"><a href="#"><img src="./app/src/img/love/shenshen.jpg " width="45" height="24" />生生世世(3344个)</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="g-person">
+        <em>给</em>
+        <input type="text" id="" class="input-text sendTo" placeholder="--请选择--" readonly />
+        <a href="#" id="sendToWho" class="to-select"></a>
+        <div class="preUserSug" id="sendToWhoList" style="display:none">
+            <ul id="sendToList">
+                <li title="--请选择--"><a href="#">--请选择--</a></li>
+            </ul>
+        </div>
+    </div>
+         <span class="g-send">
+           <a href="#" class="send" id="btn_send">赠送</a>
+         </span>
+         <span class="g-pay">
+            <a class="pay" href="#" target="_blank">
+                <em>充值</em>
+                <i></i>
+            </a>
+         </span>
+    <span class="g-money">金币：<em id="userMoney">0</em></span>
+</div>

@@ -1,0 +1,117 @@
+.inviteBox {
+    width: 490px;
+    height: auto;
+    position: absolute;
+    line-height: 100%;
+    z-index: 1000;
+    left: 50%;
+    margin-left: -370px;
+    top: 100px;
+}
+.inviteMask {
+    width: 490px;
+    height: 245px;
+    color: #666;
+    position: absolute;
+    left: 200px;
+    top: 160px;
+    overflow: hidden;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    border:1px solid #d3d3d3;
+    background:#fff;
+}
+.inviteMask .close {
+    width: 18px;
+    height: 18px;
+    z-index: 10;
+    line-height: 100px;
+    overflow: hidden;
+    display: block;
+    cursor: pointer;
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    background:url("../img/close1.png") no-repeat 0 3px;
+}
+.inviteMask .login-head{
+    color:#333333;
+    font-size:14px;
+    height:30px;
+    line-height:30px;
+    text-indent:10px;
+    background:url("../img/login-head.png") repeat-x;
+    border-bottom:1px solid #dddddd;
+}
+.inviteMask .overFrameContent{
+    padding:10px 15px;
+}
+.inviteMask .link-address{
+    margin-top:15px;
+}
+.inviteMask .link-address span{
+    float:left;
+}
+.inviteMask .link-address textarea{
+    float:left;
+}
+.inviteMask .link-address .btn{
+    color:#fff;
+    font-size:12px;
+    width:62px;
+    height:25px;
+    line-height:25px;
+    text-align:center;
+    display:block;
+    margin:25px 0 0 5px;
+    float:left;
+    background:url("../img/btn/btn3.png") no-repeat 0 0;
+}
+.inviteMask .transmit p{
+    margin:20px 0 5px;
+}
+.inviteMask .transmit ul{
+    padding:0 0 0 40px;
+}
+.inviteMask .transmit ul li{
+    float:left;
+    margin:5px;
+}
+.inviteMask .transmit ul li a{
+    color:#333;
+    width:60px;
+    height:20px;
+    line-height:25px;
+    display:block;
+    padding-left:20px;
+    background:url("../img/transmitbg.png") no-repeat 0 0;
+}
+.inviteMask  a{
+    color:#333;
+    text-decoration:none;
+}
+
+.inviteMask .transmit ul li a.sina-weibo{
+    background-position:0 0;
+}
+.inviteMask .transmit ul li a.qq-room{
+    background-position:-88px 0;
+}
+.inviteMask .transmit ul li a.qq-weibo{
+    background-position:-174px 0;
+}
+.inviteMask .transmit ul li a.renren{
+    background-position:-264px 0;
+}
+.inviteMask .transmit ul li a.qq-friend{
+    background-position:0 -30px;
+}
+.inviteMask .transmit ul li a.kaixin{
+    background-position:-88px -30px;
+}
+.inviteMask .transmit ul li a.douban{
+    background-position:-174px -30px;
+}
+.inviteMask .transmit ul li a.wyi-weibo{
+    background-position:-264px -30px;
+}

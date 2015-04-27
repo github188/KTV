@@ -1,0 +1,43 @@
+<!--排行-->
+<!--
+<div class="mine">
+    <ul id="rankType">
+        <li style="float:left"><a id="day"   href="#">日&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
+        <li style="float:left"><a id="week" href="#">周&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
+        <li style="float:left"><a id="month" href="#">月&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
+        <li style="float:left"><a id="total" href="#">总</a></li>
+    </ul>
+</div>
+<div>
+    <table>
+        <thead>
+        <tr><td>排行</td><td>用户昵称</td><td>积分</td></tr>
+        </thead>
+        <tbody id="rankTable">
+
+        </tbody>
+    </table>
+</div>-->
+
+
+<div class="room-rank-tab">
+    <h5 class="room-rank-head"><i class="icon"></i><span>房间排行榜</span></h5>
+    <ul class="datetab" id="rankType">
+        <li id="day"  class="on"><a href="#">日</a></li>
+        <li id="week"><a href="#">周</a></li>
+        <li id="month"><a href="#">月</a></li>
+        <li id="total"><a href="#">总</a></li>
+    </ul>
+</div>
+<div class="room-rank-list">
+    <ul>
+        <li>
+            <span class="num title">排行</span>
+            <span class="name title">用户昵称</span>
+            <span class="coin title">积分</span>
+        </li>
+    </ul>
+    <ul id="rankList">
+
+    </ul>
+</div>

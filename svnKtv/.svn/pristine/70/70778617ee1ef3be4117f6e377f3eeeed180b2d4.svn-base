@@ -1,0 +1,764 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<script type="text/javascript " src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
+<script type="text/javascript" src="static/JS/json.js"></script>
+<script type="text/javascript" src="static/JS/md5.js"></script>
+<script type="text/javascript" src="static/JS/swfobject.js"></script>
+<script type="text/javascript" src="serverMsgManager.js"></script>
+<script type="text/javascript" src="testInterface.js"></script>
+<script type="text/javascript ">
+var ad_core;
+var ad_video;
+var roomid = 5880309;
+var uin = "20226538";
+var groupId = 20229998;
+var session = "03F6DA3E4F7716B2F3BE2142A691D800";
+var loginUrl = "ws://192.168.1.58:8365/client";
+var bLoginSucess = false;
+var testInterface = new testInterface();
+testInterface.session = session;
+testInterface.selfUin = uin;
+var mainVideoUin = null;
+var manage1VideoUin = null;
+var manage2VideoUin = null;
+var chat = new serverMsgManager();
+var m_pressTestTimer;
+var m_pressTestTime;
+var m_pressTime = {};
+var m_pressTimer = {};
+var m_pressBackTimer = {};
+var m_resMoney;
+var managerUin = "guanli";
+var managerPassword = "123456";
+var normalUin = "qq";
+var normalPassword = "123456";
+var m_describe = {
+    "ReqGiftList":"鑾峰彇绀肩墿鍒楄〃",
+    "ReqStampList":"鑾峰彇鍗扮珷",
+    "ReqEmotionList":"鑾峰彇琛ㄦ儏鍒楄〃",
+    "ReqLogout":"鐧诲嚭",
+    "GetCollectRoom":"鏄惁鏀惰棌鎴块棿",
+    "ReqCollectRoom":"鏀惰棌鎴块棿",
+    "ReqColorBar":"鑾峰彇褰╂潯鍒楄〃",
+    "getUserMessage":"鑾峰彇鐢ㄦ埛涓汉淇℃伅"
+}
+$(function(){
+
+
+});
+function onload() {
+    ad_core = swfobject.getObjectById("ad_core");
+    if(!ad_core){
+        alert("err");
+        return;
+    }
+    ad_core.flash_InitCore();
+// testInterface.Login(loginUrl,uin,session,roomid,"",groupId);
+    alert("鍒濆鍖栨垚鍔�");
+}
+function getHost(){
+    return "http://20227018.test.vvku.com";
+}
+function js_OnLoginSuccess(data,brelogin){
+    bLoginSucess = true;
+    testInterface.selfUin = data.uin;
+    var logTextArea = document.getElementById("chat_server");
+    if(logTextArea)
+        logTextArea.value = "鐧诲綍鎴愬姛:" + JSON.stringify(data) + "\n" + logTextArea.value;
+}
+function js_OnLogout(reason){
+    bLoginSucess = false;
+    var logTextArea = document.getElementById("chat_server");
+    if(logTextArea)
+        logTextArea.value = "鐧诲嚭:" + JSON.stringify(data) + "\n" + logTextArea.value;
+}
+function js_OnLoginFail(data){
+// chat.LoginFail(data);
+    bLoginSucess = false;
+    var logTextArea = document.getElementById("chat_server");
+    if(logTextArea)
+        logTextArea.value = "鐧诲綍澶辫触:" + JSON.stringify(data) + "\n" + logTextArea.value;
+}
+function js_OnLogold(str){
+// chat.LogOld(str);
+    bLoginSucess = false;
+    var logTextArea = document.getElementById("chat_server");
+    if(logTextArea)
+        logTextArea.value = "琚尋鍑烘埧闂�:" + JSON.stringify(data) + "\n" + logTextArea.value;
+}
+function js_OnServerData(data){
+// chat.OnServerMessage(data);
+    if(data.cmd != "CMD_ECHO") {
+        var ispress = document.getElementById("isPressTest");
+        if(ispress && ispress.checked)
+        {
+            severbackCheck(data);
+        }else
+        {
+            if(data.cmd == "CMD_REQUESTUPMIC") {
+                chat.SendToServer({cmd:"CMD_REQUESTUPMIC", bRequest:true, type:data.type, uin:data.uin, desuin:data.desuin, num:data.num});
+            } else if(data.cmd == "MAINVIDEO" && "STATUS" == data.op) {
+                if(data.mainVideo != null && data.mainVideo.uin != null) {
+                    mainVideoUin = data.mainVideo.uin;
+                } else {
+                    mainVideoUin = null;
+                }
+            } else if(data.cmd == "SMALLVIDEO") {
+                if(data.mic1 == null) {
+                    manage1VideoUin = null;
+                } else {
+                    manage1VideoUin = data.mic1.uin;
+                }
+                if(data.mic2 == null) {
+                    manage2VideoUin = null;
+                } else {
+                    manage2VideoUin = data.mic2.uin;
+                }
+            }
+            var logTextArea = document.getElementById("chat_server");
+            if(logTextArea)
+                logTextArea.value = "鏀跺埌鏈嶅姟鍣ㄦ秷鎭�:" + JSON.stringify(data) + "\n" + logTextArea.value;
+            m_pressBackTimer = {};
+            m_pressTimer = {};
+            m_pressTime = {};
+        }
+    }
+}
+function js_HttpBack(data, id) {
+    chat.OnHttpRequestCallBack(data, id);
+}
+function severbackCheck(data){
+    if(!data)
+        return;
+    var logTextArea = document.getElementById("chat_server");
+    switch(data.cmd){
+        case "CHAT_TEXT":
+            if(!m_pressBackTimer["CHAT_TEXT"])
+                m_pressBackTimer["CHAT_TEXT"] = [];
+            m_pressBackTimer["CHAT_TEXT"].push(new Date().getTime());
+            var leng = m_pressBackTimer["CHAT_TEXT"].length-1;
+            logTextArea.value = "鑱婂ぉ鎴愬姛锛佸綋鍓嶆祴璇曟鏁�"+(leng+1)+"-----鍝嶅簲鏃堕棿锛�"+(m_pressBackTimer["CHAT_TEXT"][leng]-m_pressTimer["CHAT_TEXT"][leng])+"姣\n"+ logTextArea.value;
+            if(m_pressBackTimer["CHAT_TEXT"].length == m_pressTestTime)
+            {
+                var testAVG = 0;
+                for(var i=0;i<m_pressTestTime;i++)
+                {
+                    testAVG += m_pressBackTimer["CHAT_TEXT"][i];
+                    testAVG -= m_pressTimer["CHAT_TEXT"][i];
+                }
+                testAVG = testAVG/m_pressTestTime;
+                logTextArea.value = "鑱婂ぉ骞冲潎鍝嶅簲鏃堕棿锛�-----"+testAVG+"姣\n"+ logTextArea.value;
+                stopTest();
+            }
+            break;
+        case "SELF_SYSMSG":
+//logTextArea.value = "绯荤粺娑堟伅-----"+JSON.stringify(data)+"\n"+ logTextArea.value;
+            break;
+        case "MAINVIDEO":
+            console.log(data.UpMicTimer);
+            if(data.UpMicTimer)
+            {
+                logTextArea.value = "涓昏棰戞秷鎭�-----涓婅棰戞垚鍔�--"+(new Date().getTime()-m_pressTimer["OnUpMic"])+"姣\n"+ logTextArea.value;
+                OnDownMic();
+            }else if(data.mainVideo == null && data.op == "STATUS")
+            {
+                logTextArea.value = "涓昏棰戞秷鎭�-----涓嬭棰戞垚鍔�--"+(new Date().getTime()-m_pressTimer["OnDownMic"])+"姣\n"+ logTextArea.value;
+                OnUpMic();
+            }
+            break;
+        case "SMALLVIDEO":
+            if(data.mic1 == null && data.mic2 == null)
+            {
+                logTextArea.value = "灏忚棰戞秷鎭�-----涓嬭棰戞垚鍔�--"+(new Date().getTime()-m_pressTimer["OnDownMic"])+"姣\n"+ logTextArea.value;
+                OnUpMic();
+            }else if(data.mic1 && data.mic2)
+            {
+                logTextArea.value = "灏忚棰戞秷鎭�-----涓婅棰戞垚鍔�--"+(new Date().getTime()-m_pressTimer["OnUpMic"])+"姣\n"+ logTextArea.value;
+                OnDownMic();
+            }else if(data.mic1)
+            {
+                logTextArea.value = "灏忚棰戞秷鎭�-----涓婂乏瑙嗛鎴愬姛--"+(new Date().getTime()-m_pressTimer["OnUpMic"])+"姣\n"+ logTextArea.value;
+                OnDownMic();
+            }else if(data.mic2)
+            {
+                logTextArea.value = "灏忚棰戞秷鎭�-----涓婂彸瑙嗛鎴愬姛--"+(new Date().getTime()-m_pressTimer["OnUpMic"])+"姣\n"+ logTextArea.value;
+                OnDownMic();
+            }
+            break;
+        case "CMD_MOD":
+            if(data.msg && data.msg.cmd == "CMD_GIFT")
+            {
+                if(!m_pressBackTimer["CMD_GIFT"])
+                    m_pressBackTimer["CMD_GIFT"] = [];
+                m_pressBackTimer["CMD_GIFT"].push(new Date().getTime());
+                var leng = m_pressBackTimer["CMD_GIFT"].length-1;
+                logTextArea.value = "閫佺ぜ鎴愬姛锛佸綋鍓嶆祴璇曟鏁帮細"+(leng+1)+"-----鍝嶅簲鏃堕棿锛�"+(m_pressBackTimer["CMD_GIFT"][leng]-m_pressTimer["CMD_GIFT"][leng])+"姣\n"+ logTextArea.value;
+                if(m_pressBackTimer["CMD_GIFT"].length == m_pressTestTime)
+                {
+                    var testAVG = 0;
+                    for(var i=0;i<m_pressTestTime;i++)
+                    {
+                        testAVG += m_pressBackTimer["CMD_GIFT"][i];
+                        testAVG -= m_pressTimer["CMD_GIFT"][i];
+                    }
+                    testAVG = testAVG/m_pressTestTime;
+                    logTextArea.value = "閫佺ぜ骞冲潎鍝嶅簲鏃堕棿锛�-----"+testAVG+"姣\n"+ logTextArea.value;
+                    stopTest();
+                }
+            }
+            break;
+        case "CMD_KMONEY":
+            if(m_pressTimer["CMD_KMONEY"] && ((new Date().getTime() - m_pressTimer["CMD_KMONEY"])<10))
+            {
+                logTextArea.value = "鎵ｉ櫎v璞�---"+(data.resMoney-m_resMoney)+"\n"+ logTextArea.value;
+            }
+            m_resMoney = data.resMoney;
+            m_pressTimer["CMD_KMONEY"] = new Date().getTime();
+            break;
+        default:
+            break;
+    }
+}
+function OnLoginClick() {
+    if(!document.getElementById("title_username") || document.getElementById("title_username").value == "") {
+        alert("鐢ㄦ埛鍚嶄笉鑳戒负绌�");
+        stopTest();
+        return;
+    }
+    if(!document.getElementById("title_password") || document.getElementById("title_password").value == "") {
+        alert("瀵嗙爜涓嶈兘涓虹┖");
+        stopTest();
+        return;
+    }
+    testInterface.ReqLogin(document.getElementById("title_username").value, document.getElementById("title_password").value);
+}
+function OnLogoutClick() {
+    if(bLoginSucess) {
+// testInterface.commomSend("ReqLogout");
+    } else {
+        alert("璇峰厛鐧诲綍");
+    }
+}
+function OnReqGiftList() {
+    if(bLoginSucess) {
+        testInterface.commomSend("ReqGiftList");
+    } else {
+        alert("璇峰厛鐧诲綍");
+    }
+}
+function OnReqStampList() {
+    if(bLoginSucess) {
+        testInterface.commomSend("ReqStampList");
+    } else {
+        alert("璇峰厛鐧诲綍");
+    }
+}
+function OnReqEmotionList() {
+    if(bLoginSucess) {
+        testInterface.commomSend("ReqEmotionList");
+    } else {
+        alert("璇峰厛鐧诲綍");
+    }
+}
+function OnReqGetCollectRoom() {
+    if(bLoginSucess) {
+        testInterface.commomSend("GetCollectRoom");
+    } else {
+        alert("璇峰厛鐧诲綍");
+    }
+}
+function OnReqCollectRoom() {
+    if(bLoginSucess) {
+        testInterface.commomSend("ReqCollectRoom");
+    } else {
+        alert("璇峰厛鐧诲綍");
+    }
+}
+function OnReqColorBar() {
+    if(bLoginSucess) {
+        testInterface.commomSend("ReqColorBar");
+    } else {
+        alert("璇峰厛鐧诲綍");
+    }
+}
+function OngetUserMessage() {
+    if(bLoginSucess) {
+        testInterface.commomSend("getUserMessage");
+    } else {
+        alert("璇峰厛鐧诲綍");
+    }
+}
+function OnUpMic() {
+    if(bLoginSucess) {
+        var uin = document.getElementById("videouser").value;
+        if(uin == "") {
+            alert("濉啓鐢ㄦ埛id");
+            return;
+        }
+        m_pressTimer["OnUpMic"] = new Date().getTime();
+        if(document.getElementById("mainVideoid") && document.getElementById("mainVideoid").checked) {
+            chat.SendToServer({cmd:"MAINVIDEO", op:"UP", desuin:uin});
+        } else if(document.getElementById("leftVideoid") && document.getElementById("leftVideoid").checked) {
+            chat.SendToServer({cmd:"SMALLVIDEO", op:"UP", index:1, desuin:uin});
+        }else if(document.getElementById("rightVideoid") && document.getElementById("rightVideoid").checked){
+            chat.SendToServer({cmd:"SMALLVIDEO", op:"UP", index:2, desuin:uin});
+        }else
+        {
+            alert("璇烽€夋嫨瑙嗛锛�");
+            return;
+        }
+    } else {
+        alert("璇峰厛鐧诲綍");
+    }
+}
+function OnDownMic() {
+    if(bLoginSucess) {
+        var uin = document.getElementById("videouser").value;
+        if(uin == "") {
+            alert("濉啓鐢ㄦ埛id");
+            stopTest();
+            return;
+        }
+        console.log(mainVideoUin + " " + manage1VideoUin + " " + manage2VideoUin);
+        m_pressTimer["OnDownMic"] = new Date().getTime();
+        if(document.getElementById("mainVideoid") && document.getElementById("mainVideoid").checked) {
+            if(mainVideoUin != null) {
+                chat.SendToServer({cmd:"MAINVIDEO", op:"DOWN", desuin:mainVideoUin});
+            }
+        } else if(document.getElementById("leftVideoid") && document.getElementById("leftVideoid").checked) {
+            chat.SendToServer({cmd:"SMALLVIDEO", op:"DOWN", index:1, desuin:manage1VideoUin});
+        } else if(document.getElementById("rightVideoid") && document.getElementById("rightVideoid").checked) {
+            chat.SendToServer({cmd:"SMALLVIDEO", op:"DOWN", index:2, desuin:manage2VideoUin});
+        }else
+        {
+            alert("璇烽€夋嫨瑙嗛锛�");
+            return;
+        }
+    } else {
+        alert("璇峰厛鐧诲綍");
+    }
+}
+function sendto() {
+    if(m_pressTestTime && m_pressTime["CHAT_TEXT"] >= m_pressTestTime)
+    {
+        return;
+    }
+    var uin = document.getElementById("talkto").value;
+    if(uin == "") {
+        alert("濉啓鐢ㄦ埛id");
+        stopTest();
+        return;
+    }
+    var talktext = document.getElementById("talkText").value;
+    if(talktext == "") {
+        alert("娌℃湁鑱婂ぉ鍐呭");
+        stopTest();
+        return;
+    }
+    if(! m_pressTimer["CHAT_TEXT"])
+        m_pressTimer["CHAT_TEXT"] = [];
+    m_pressTimer["CHAT_TEXT"].push(new Date().getTime());
+    if(!m_pressTime["CHAT_TEXT"])
+        m_pressTime["CHAT_TEXT"] = 1;
+    else
+        m_pressTime["CHAT_TEXT"]++;
+    chat.SendToServer({cmd:"CHAT_TEXT", des_uin:uin, text:talktext, bSecret:false});
+}
+function sendBroadcast(){
+    var pkt = {};
+    if(document.getElementById("broadcastid").checked){
+        pkt.cmd = "CMD_SEND_BROADCAST";
+    }else if(document.getElementById("hornid").checked){
+        pkt.cmd = "CMD_SEND_HORN";
+    }else{
+        alert("璇烽€夋嫨鍙戦€佺被鍨�!");
+        return;
+    }
+    var str = document.getElementById("broadcastText").value;
+    pkt.str = str;
+    chat.SendToServer(pkt);
+}
+function OnSendGift() {
+    if(m_pressTestTime && m_pressTime["CMD_GIFT"] >= m_pressTestTime)
+    {
+        return;
+    }
+    var uin = document.getElementById("giftTo").value;
+    if(uin == "") {
+        alert("濉啓鐢ㄦ埛id");
+        stopTest();
+        return;
+    }
+    var num = document.getElementById("giftNum").value;
+    if(num == "") {
+        alert("濉啓绀肩墿鏁伴噺");
+        stopTest();
+        return;
+    }
+    var giftcmd = document.getElementById("giftCmd").value;
+    if(giftcmd == "") {
+        alert("濉啓ParentId");
+        stopTest();
+        return;
+    }
+    var giftid = document.getElementById("giftId").value;
+    if(giftid == "") {
+        alert("濉啓绀肩墿id");
+        stopTest();
+        return;
+    }
+    if(! m_pressTimer["CMD_GIFT"])
+        m_pressTimer["CMD_GIFT"] = [];
+    m_pressTimer["CMD_GIFT"].push(new Date().getTime());
+    if(!m_pressTime["CMD_GIFT"])
+        m_pressTime["CMD_GIFT"] = 1;
+    else
+        m_pressTime["CMD_GIFT"]++;
+    var pkt = { cmd:"CMD_MOD" };
+    pkt.msg = {
+        cmd:"CMD_GIFT"
+    }
+// cmd:"SEND_GIFT",
+// id:327,
+// num:1,
+// des_uin:des_uin,
+// des_nick:des_uin,
+// giftname:妫掓绯�,
+// giftcmd:10355,
+// gifttype:1,
+// RegionId:1314,
+// prayStr:null,
+// groupName:鈥溾€�
+    pkt.msg.msg = {
+        cmd:"SEND_GIFT",
+        id:giftid,
+        num:num,
+        des_uin:uin,
+// des_nick:giftlogic.sendToUser.nick,
+// giftname:giftObj.PropsName,
+        giftcmd:giftcmd,
+        gifttype: 1,//giftObj.giftType,
+        RegionId:"1314",
+        prayStr:"",
+        groupName:""
+    };
+    chat.SendToServer(pkt);
+}
+function OnSofa() {
+    if(mainVideoUin == null) {
+        alert("瑙嗛涓婃病鏈変汉");
+        stopTest();
+        return;
+    }
+    var num = document.getElementById("sofaNum").value;
+    if(num == "" || num <= 0) {
+        alert("鎶㈡矙鍙戞暟閲忎笉瀵�");
+        stopTest();
+        return;
+    }
+// var sofaid = document.getElementById("sofaID").value;
+// if(sofaid == "" || sofaid <= 0) {
+// alert("鎶㈡矙鍙慖D涓嶅");
+// return;
+// }
+    var sofaindex = document.getElementById("sofaIndex").value;
+    if(sofaindex == "" || sofaindex <= 0) {
+        alert("娌欏彂index涓嶅");
+        stopTest();
+        return;
+    }
+    var pkt = {
+        cmd:"CMD_MOD"
+    }
+    pkt.msg = {
+        cmd:"CMD_GIFT"
+    }
+    pkt.msg.msg = {
+        cmd:"CMD_SOFA",
+        msg:{
+            id:"10475", // sofaid,
+            num:num,
+            des_uin:mainVideoUin,
+            giftname:"鎶㈡矙鍙�", //m_sofaObj.gifname,
+            giftcmd:"10475",
+            gifttype:1,
+            RegionId:"1314",
+            prayStr:"",
+            groupName:"",
+            index:sofaindex}
+    }
+    chat.SendToServer(pkt);
+}
+function OnGuard() {
+    var num = document.getElementById("guardNum").value;
+    if(num == "" || num <= 0) {
+        alert("瀹堟姢鏁伴噺涓嶅");
+        stopTest();
+        return;
+    }
+    var uin = document.getElementById("VideoID").value;
+    if(uin == "" || uin <= 0) {
+        alert("瀹堟姢瀵硅薄涓嶅");
+        stopTest();
+        return;
+    }
+    var guardid = document.getElementById("guardID").value;
+    if(guardid == "") {
+        alert("瀹堟姢id涓嶅");
+        stopTest();
+        return;
+    }
+    chat.SendToServer({cmd:"CMD_BUYGUARD", num:num, uin:uin, id:guardid});
+}
+function testUserSelect(){
+    var user1 = document.getElementById("managerUser");
+    var user2 = document.getElementById("normalUser");
+    var uin,password;
+    if(user1 && user2)
+    {
+        if(user1.checked)
+        {
+            uin = managerUin;
+            password = managerPassword;
+        }else if(user2.checked)
+        {
+            uin = normalUin;
+            password = normalPassword;
+        }
+        if(document.getElementById("title_username")) {
+            document.getElementById("title_username").value = uin;
+        }
+        if(document.getElementById("title_password")) {
+            document.getElementById("title_password").value = password;
+        }
+    }else
+    {
+        alert("鐢ㄦ埛閫夋嫨radio鍔犺浇鏈畬鎴愶紒");
+    }
+}
+function pressTest(func){
+    var pressCheck = document.getElementById("isPressTest");
+    if(!pressCheck){
+        alert("111");
+        return;
+    }
+    if(pressCheck.checked)
+    {
+        if(m_pressTestTimer){
+            alert("宸茬粡鍦ㄥ帇鍔涙祴璇曚腑锛�");
+            return;
+        }
+        m_pressTestTime = Number(document.getElementById("pressTestTime").value);
+        var con = document.getElementById("pressTestTimer");
+        if(!con)
+            return;
+        var time = Number(con.value);
+        if(!time)
+            time = 500;
+        if(bLoginSucess)
+            m_pressTestTimer = setInterval(func,time);
+        else
+            alert("璇峰厛鐧诲綍");
+    }else
+    {
+        func();
+    }
+}
+function stopTest(type){
+    clearInterval(m_pressTestTimer);
+    m_pressTestTimer = null;
+    destoryObj(type);
+// document.getElementById("isPressTest").checked = false;
+}
+function destoryObj(type){
+    if(type){
+        testInterface[type+"BackTimer"] = null;
+        testInterface[type+"Timer"] = null;
+        testInterface[type+"Time"] = 0;
+    }else
+    {
+        m_pressTestTime = 0;
+        m_pressTime = {};
+        m_pressTimer = {};
+        m_pressBackTimer = {};
+        for(var str in m_describe){
+            destoryObj(str);
+        }
+    }
+}
+function compareObject(a,b){
+    var pt = /undefined|number|string|boolean/,
+            fn = /^(function\s*)(\w*\b)/,
+            cr = "constructor",
+            cn = "childNodes",
+            pn = "parentNode",
+            ce = arguments.callee;
+    if(pt.test(typeof a) || pt.test(typeof b) || a === null || b === null){
+        return a === b || (isNaN(a) && isNaN(b)); //涓轰簡鏂逛究锛屾澶勫亣瀹歂aN == NaN
+    }
+    if(a[cr] !== b[cr]){
+        return false;
+    }
+    switch(a[cr]){
+        case Date : {
+            return a.valueOf() === b.valueOf();
+        };
+        case Function : {
+            return a.toString().replace(fn,'$1') === b.toString().replace(fn,'$1'); //纭紪鐮佷腑澹版槑鍑芥暟鐨勬柟寮忎細褰卞搷鍒皌oString鐨勭粨鏋滐紝鍥犳鐢ㄦ鍒欒繘琛屾牸寮忓寲
+        };
+        case Array : {
+            if(a.length !== b.length){
+                return false;
+            }
+            for(var i=0;i<a.length;i++){
+                if(!ce(a[i],b[i])){
+                    return false;
+                }
+            }
+            break;
+        };
+        default : {
+            var alen = 0, blen = 0, d;
+            if(a === b){
+                return true;
+            }
+            if(a[cn] || a[pn] || b[cn] || b[pn]){
+                return a === b;
+            }
+            for(d in a){
+                alen++ ;
+            }
+            for(d in b){
+                blen++;
+            }
+            if(alen !== blen){
+                return false;
+            }
+            for(d in a){
+                if(!ce(a[d],b[d])){
+                    return false;
+                }
+            }
+            break;
+        };
+    }
+    return true;
+}
+</script >
+</head>
+<body onload="onload()">
+<table width="100%" height="15">
+    <tr>
+        <input type="checkbox" id="isPressTest">鍘嬪姏娴嬭瘯</input>
+        <text> 娴嬭瘯闂撮殧:<text>
+            <input type="input" id="pressTestTimer"></input>
+            <text> 娴嬭瘯娆℃暟:<text>
+                <input type="input" id="pressTestTime"></input>
+                <button onclick="stopTest()">鍋滄鍘嬪姏娴嬭瘯</button>
+                <text> 娉�細鐧诲綍娴嬭瘯杩斿洖淇℃伅澶锛屾殏鏃朵笉鑳戒娇鐢ㄥ帇鍔涙祴璇曟柟寮忥紝浼氭湁鍏朵粬杩斿洖骞叉壈銆�<text>
+    </tr>
+</table>
+<table width="100%" height="100%" border="8">
+    <tr width="100%" height="30" >
+        <td>
+            <label>鐢ㄦ埛鍚�:</label>
+            <input id="title_username" />
+            <label>瀵嗙爜:</label>
+            <input id="title_password" type="password"/>
+            <input type="radio" name="usertype" id="managerUser" onclick="testUserSelect()">绠＄悊鍛�</input>
+            <input type="radio" name="usertype" id="normalUser" onclick="testUserSelect()">鏅€氱敤鎴�</input>
+        </td>
+        <td>
+            <button onclick="pressTest(OnLoginClick)">鐧诲綍</button><button onclick="pressTest(OnLogoutClick)">鐧诲嚭</button>
+            <button onclick="pressTest(OnReqGiftList)">璇锋眰绀肩墿鍒楄〃</button>
+            <button onclick="pressTest(OnReqStampList)">鑾峰彇鍗扮珷鍒楄〃</button>
+            <button onclick="pressTest(OnReqEmotionList)">鑾峰彇琛ㄦ儏鍒楄〃</button>
+            <button onclick="pressTest(OnReqGetCollectRoom)">鏄惁宸茬粡鏀惰棌鎴块棿</button>
+            <button onclick="pressTest(OnReqCollectRoom)">鏀惰棌鎴块棿</button>
+            <button onclick="pressTest(OnReqColorBar)">璇锋眰褰╂潯鍒楄〃</button>
+            <button onclick="pressTest(OngetUserMessage)">鑾峰彇鐢ㄦ埛涓汉淇℃伅</button>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <input type="radio" name="videoIndex" id="mainVideoid">涓昏棰�</input>
+            <input type="radio" name="videoIndex" id="leftVideoid">宸﹁棰�</input>
+            <input type="radio" name="videoIndex" id="rightVideoid">鍙宠棰�</input>
+            <label>涓�/涓嬭棰戠敤鎴穟in</label><input id="videouser"></input>
+            <button onclick="OnUpMic()">涓婅棰�</button>
+            <button onclick="OnDownMic()">涓嬭棰�</button>
+        </td>
+        <td>
+            <input type="radio" name="broadcast" id="broadcastid">骞挎挱</input>
+            <input type="radio" name="broadcast" id="hornid">鍠囧彮</input>
+            <input id="broadcastText" value="sasasa"/>
+            <button onclick="pressTest(sendBroadcast)">鍙戦€�</button>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <label>瀵�:</label><input id="talkto" ></input><label>璇�</label><input id="talkText" ></input><button onclick="pressTest(sendto)">鍙戦€�</button>
+        </td>
+        <td>
+            鍚�<input id="giftTo" ></input>閫�<input id="giftNum"></input>涓�(ParentId)<input id="giftCmd" value="10355"></input>(ID)<input id="giftId" value="327"></input><button onclick="pressTest(OnSendGift)">璧犻€�</button>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            鎶㈡矙鍙戜釜鏁�:<input id="sofaNum"></input>娌欏彂index<input id="sofaIndex"></input><button onclick="pressTest(OnSofa)">鎶㈡矙鍙�</button>
+        </td>
+        <td>
+            璐拱瀹堟姢瀵硅薄uin<input id="VideoID"></input>璐拱鏁伴噺<input id="guardNum"></input>璐拱瀹堟姢id<input id="guardID"></input><button onclick="pressTest(OnGuard)">璐拱瀹堟姢</button>
+        </td>
+    </tr>
+    <tr>
+        <table width="100%" height="100%" >
+            <tr>
+                <td width="33%">
+                    <label>鏈嶅姟鍣ㄦ秷鎭�</label></br>
+                    <textarea id="chat_server" style="width:100%; height:400px;"></textarea>
+                </td>
+                <td width="33%">
+                    <label>http璇锋眰鍙戦€�</label></br>
+                    <textarea id="chat_Send" style="width:100%; height:400px;">
+                    </textarea>
+                </td>
+                <td width="33%">
+                    <label>http璇锋眰杩斿洖</label></br>
+                    <textarea id="chat_Req" style="width:100%; height:400px;">
+                    </textarea>
+                </td>
+            </tr>
+        </table>
+    </tr>
+</table>
+<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="0" height="0" id="ad_core">
+    <param name="movie" value="ad_core.swf" />
+    <param name="quality" value="high" />
+    <param name="bgcolor" value="#ff0000" />
+    <param name="allowScriptAccess" value="sameDomain" />
+    <param name="allowFullScreen" value="true" />
+    <!--[if !IE]>-->
+    <object type="application/x-shockwave-flash" data="ad_core.swf" width="0" height="0">
+        <param name="quality" value="high" />
+        <param name="bgcolor" value="#ffffff" />
+        <param name="allowScriptAccess" value="sameDomain" />
+        <param name="allowFullScreen" value="true" />
+        <!--<![endif]-->
+        <!--[if gte IE 6]>-->
+        <p>
+            Either scripts and active content are not permitted to run or Adobe Flash Player version
+            11.0.0 or greater is not installed.
+        </p>
+        <!--<![endif]-->
+        <a href="http://www.adobe.com/go/getflashplayer">
+            <img src="http://www.adobe.com/images/shared/download_buttons/get_flash_player.gif" alt="Get Adobe Flash Player" />
+        </a>
+        <!--[if !IE]>-->
+    </object>
+    <!--<![endif]-->
+</object>
+</body>
+</html> 

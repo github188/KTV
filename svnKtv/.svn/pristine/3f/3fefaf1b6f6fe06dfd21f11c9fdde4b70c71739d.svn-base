@@ -1,0 +1,63 @@
+/**
+ * Created with JetBrains WebStorm.
+ * User: Administrator
+ * Date: 14-1-9
+ * Time: 下午2:07
+ * To change this template use File | Settings | File Templates.
+ */
+define(function(require, exports, module){
+    function Rank(callBack) {
+        this.options={};
+        this.callBack = callBack;
+        this.rankData=null;
+        this.$rankList = $("#rankList");
+        this.tmpl = ' <li><span class="num"><i></i></span><span class="name"><a href="#">${Nick}</a></span><span class="coin">${Weight}</span></li>';
+        this.initRank();
+    }
+   //对外开放刷新列表接口
+    Rank.prototype.resetRankList=function(data){
+        this.rankData = data.list;  //日周月总
+        this.resetBranchList("day");
+    }
+    Rank.prototype.resetBranchList = function(type){
+        var data = this.rankData[type];
+        if(!data){
+            this.$rankList.html("当前无排行榜数据");
+            return;
+        }else{
+            this.$rankList.empty();
+            this.notTemplate (this.$rankList ,data);
+            this.initRankImg();
+        }
+    }
+    Rank.prototype.template = function($list,template,data){
+        $.template("template", template);
+        $list.html($.tmpl("template", data));
+    }
+    Rank.prototype.notTemplate = function($list,data){
+       var html="";
+        $(data).each(function(i){
+           var result = data[i];
+           html+='<li><span class="num"><i></i></span><span class="name"><a href="#">'+result["Nick"]+'</a></span><span class="coin">'+result["Weight"]+'</span></li>';
+        });
+        $list.append(html);
+    }
+    Rank.prototype.initRankImg=function(){
+        var $i = $(".num","#rankList").find("i");
+        $($i).each(function(i){
+            var index =i+ 1,cls= "num"+index;
+            $(this).addClass("numbg "+cls);
+        });
+
+    }
+    Rank.prototype.initRank=function(){
+        var self =this;
+        $("#rankType").find("li").click(function(){
+            $(this).addClass("on").siblings().removeClass("on");
+            var type = $(this).attr("id");
+             self.resetBranchList(type);
+        });
+    }
+    module.exports = Rank;
+});
+

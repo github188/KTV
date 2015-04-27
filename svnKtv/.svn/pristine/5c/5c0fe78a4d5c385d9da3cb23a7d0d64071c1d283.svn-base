@@ -1,0 +1,107 @@
+.blue{color:#126bd6;}
+.interactBox {
+    width: 250px;
+    height: auto;
+    position: absolute;
+    line-height: 100%;
+    z-index: 1000;
+    left: 50%;
+    margin-left: 650px;
+    margin-top: -76px;
+    top: 100px;
+    font-family:"微软雅黑";
+}
+.interactMask {
+    width: 250px;
+    height: auto;
+    color: #666;
+    position: absolute;
+    left: 0;
+    top: 0;
+    overflow: hidden;
+    border:1px solid #d3d3d3;
+    background:#fff;
+}
+.interactMask .person-wrap{
+    height:90px;
+    overflow:hidden;
+}
+.interactMask .person-wrap .person-img{
+    width:70px;
+    float:left;
+    padding:12px;
+}
+.interactMask .person-wrap .person-info{
+    width:150px;
+    float:left;
+    padding-top:15px;
+}
+.interactMask .person-wrap .person-info p{
+    line-height:14px;
+}
+.interactMask .interactbar{
+    width:100%;
+    height:21px;
+    background:url("../img/popuser/titlebg1.png");
+}
+.interactMask .interactbar p{
+    margin:0;
+    padding:0;
+    height:20px;
+    line-height:20px;
+}
+.interactMask .interactbar p .arrow-down{
+    width:9px;
+    height:5px;
+    display:block;
+    margin:8px 5px 0 3px;
+    float:left;
+    background:url("../img/popuser/arrowdown.png");
+}
+.interactMask .interactbar p .arrow-up{
+    width:9px;
+    height:5px;
+    display:block;
+    margin:8px 5px 0 3px;
+    float:left;
+    background:url("../../../app/src/img/popuser/arrowup.png");
+}
+.interactMask .interact-way{
+    position:relative;
+}
+.interactMask .interact-way .arrow-left{
+    width:5px;
+    height:9px;
+    display:block;
+    position: absolute;
+    right: 10px;
+    top: 0;
+    margin:8px 5px 0 3px;
+    float:left;
+    background:url("../../../app/src/img/arrowl1.png") no-repeat;
+}
+.interactMask .interact-way .arrow-left:hover{
+    background:url("../../../app/src/img/arrowl2.png") no-repeat;
+}
+.interactMask .interact-way .arrow-right{
+    width:5px;
+    height:9px;
+    display:block;
+    position: absolute;
+    right: 0;
+    top: 0;
+    margin:8px 5px 0 3px;
+    float:left;
+    background:url("../../../app/src/img/arrowr1.png") no-repeat;
+}
+.interactMask .interact-way .arrow-right:hover{
+    background:url("../../../app/src/img/arrowr2.png") no-repeat;
+}
+.interactMask .interact-way ul{
+    margin-bottom:6px;
+}
+.interactMask .interact-way ul li{
+    float:left;
+    margin-left:5px;
+    margin-top:5px;
+}

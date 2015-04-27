@@ -1,0 +1,107 @@
+.dicesetBox {
+    width: 365px;
+    height: 460px;
+    position: absolute;
+    line-height: 100%;
+    z-index: 1000;
+    left: 60%;
+    margin-left: -370px;
+    top: 200px;
+}
+.dicesetMask {
+    width: 365px;
+    height: 460px;
+    color: #000;
+    position: absolute;
+    left: 0;
+    top: 0;
+    overflow: hidden;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    border:1px solid #d3d3d3;
+    background:#fafafa;
+}
+.dicesetMask .close {
+    width: 18px;
+    height: 18px;
+    z-index: 10;
+    line-height: 100px;
+    overflow: hidden;
+    display: block;
+    cursor: pointer;
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    background:url("../img/close1.png") no-repeat 0 3px;
+}
+.dicesetMask .head{
+    color:#333333;
+    font-size:14px;
+    height:30px;
+    line-height:30px;
+    text-indent:10px;
+    background:url("../img/login-head.png") repeat-x;
+    border-bottom:1px solid #dddddd;
+}
+.dicesetMask .overFrameContent{
+    padding:15px;
+}
+.dicesetMask input[type="radio"]{
+    position:relative;
+    top:-2px;
+}
+.dicesetMask p{
+    margin-bottom:5px;
+}
+.dicesetMask p label{
+    margin-right:10px;
+}
+.dicesetMask p .inputcs{
+    color:#7c7c7c;
+    width:30px;
+    margin-right:5px;
+}
+.dicesetMask .rulewrap{
+    border-top:1px solid #e0e2e1;
+    padding-top:10px;
+    margin-top:10px;
+}
+.dicesetMask .rulewrap h4{
+    font-size:12px;
+    font-weight:normal;
+}
+.dicesetMask .rulewrap h5{
+    color:#7d7d7d;
+    font-size:12px;
+    font-weight:normal;
+    padding-left:20px;
+    margin:10px 0;
+}
+.dicesetMask .rulewrap p{
+    padding-left:40px;
+}
+.dicesetMask .rulewrap p label{
+    color:#7c7c7c;
+}
+.dicesetMask .btnwrap{
+    height:30px;
+    margin-top:10px;
+}
+.dicesetMask .btnwrap .btn{
+    color:#fff;
+    width:62px;
+    height:25px;
+    border:0;
+    cursor:pointer;
+    margin:0 auto;
+    display:block;
+    background:url("../img/btn/btn3.png") no-repeat 0 0;
+}
+.dicesetMask .btnwrap .confirm-btn{
+    float:left;
+    margin-left:30px;
+}
+.dicesetMask .btnwrap .cancel-btn{
+    float:left;
+    margin-left:50px;
+}

@@ -1,0 +1,34 @@
+<!--房主信息-->
+        <!--<div id="10001" class="host">
+            <img class="img" src=""/>
+            <p>~上官燕</p>
+            <p>浙江  杭州</p>
+            <p><img src=""/></p>
+            <span><a sign="attention">关注</a></span>
+            <span><a sign="stow">收藏</a></span>
+        </div>
+        <div id="dialog" width="500px" height="300px" style="background-color: darkseagreen"><span id="info"></span></div>-->
+
+<!--<div class="intro">
+    <span class="attention" id="attention">关注</span>
+    <span class="attention" id="stow">收藏</span>
+    <div id="info">
+        <p class="us"><span class="name">凝音（20230440）</span></p>
+        <p class="us"><img src="app/src/img/star/y5.png" width="26" height="18" />，距下一级还差<em>1146478765</em>积分</p>
+        <p class="us"><img src="app/src/img/rich/f7.png" width="35" height="18" />，距下一级还差<em>1146478765</em>积分</p>
+        <p class="us"><img src="app/src/img/rich/f7.png" width="35" height="18" />，距下一级还差<em>1146478765</em>积分</p>
+     </div>
+
+</div>-->
+
+<div class="blackbg"></div>
+<div class="pic">
+    <a id="avatar_title" title="Dearlyゝ小庝庝~的直播室" href="/873088"><img src="http://vi1.6rooms.com/live/55/68/b85e38865b.jpg" id="avatar_img"></a>
+</div>
+<div class="intro" >
+    <span class="attention" id="attention">收藏</span>
+    <div id="info">
+
+    </div>
+    <p class="us" style="display: none"><img src="/app/src/img/clock.png " width="14" height="15" />&nbsp;<i id="start"></i>-<i id="end"></i>，开播了，欢迎观看~</p>;
+</div>

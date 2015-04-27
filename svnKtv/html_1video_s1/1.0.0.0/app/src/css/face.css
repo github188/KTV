@@ -1,0 +1,86 @@
+.clears:before,.clears:after {content:'';display:table;}
+.clears:after {clear:both;}
+.clears {*zoom:1;}
+.faceBox {
+    width: 340px;
+    height: auto;
+    position: absolute;
+    line-height: 100%;
+    z-index: 1000;
+    left: 50%;
+    margin-left: -370px;
+    top: 100px;
+}
+
+.faceMask {
+    width: 356px;
+    height: 320px;
+    color: #666;
+    position: absolute;
+    left: 0;
+    top: 0;
+    overflow: hidden;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    border:1px solid #d3d3d3;
+    background:#fff;
+}
+.faceMask .close {
+    width: 18px;
+    height: 18px;
+    z-index: 10;
+    line-height: 100px;
+    overflow: hidden;
+    display: block;
+    cursor: pointer;
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    background:url("../img/close1.png") no-repeat 0 3px;
+}
+.faceMask .login-head{
+    color:#333333;
+    font-size:14px;
+    height:30px;
+    line-height:30px;
+    text-indent:10px;
+    background:url("../img/login-head.png") repeat-x;
+    border-bottom:1px solid #dddddd;
+}
+.faceMask .faceList {
+    height:250px
+}
+.faceMask .faceList table{
+    margin:5px;
+}
+.faceMask .faceList table td{
+    text-align:center;
+    width:35px;
+    height:35px;
+    line-height:35px;
+    border:1px solid #d3d3d3;
+}
+.faceMask .face-tab ul li{
+    float:left;
+    width:60px;
+    height:20px;
+    line-height:20px;
+    text-align:center;
+    margin:4px;
+}
+.faceMask .face-tab ul li a{
+    color:#333;
+}
+.faceMask .face-tab i.arrow{
+    width:8px;
+    height:8px;
+    background:url("../img/scollbar/arrowDown.png") no-repeat 0 0;
+    display:inline-block;
+    margin-left:3px;
+}
+.faceMask .face-tab ul li.current{
+    background:#848484;
+}
+.faceMask .face-tab ul li.current a{
+    color:#fff;
+}

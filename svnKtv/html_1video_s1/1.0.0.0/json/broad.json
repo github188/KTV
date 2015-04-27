@@ -1,0 +1,24 @@
+{  "resMony":{"resMoney":201888241,"__ack":26,"cmd":"CMD_KMONEY"},
+    "r2":{"resMoney":201888091,"__ack":25,"cmd":"CMD_KMONEY"},
+     "r3":
+        {"__ack":24,
+         "cmd":"CMD_MOD",
+         "msg":
+              {"cmd":"CMD_GIFT",
+               "msg":
+                    {"toJSONString":null,"groupName":"","id":"327","cmd":"SEND_GIFT","des_stampid":0,"tim":"(16:30:56)","src_stampid":0,"parseJSON":null,
+                    "src_icons":
+                        ["http://oss.vvku.com/pic/vvku-dev/p/b13148c481e4c3f6e896563f00d468d1_t5v1hx/0/0.jpg",
+                        "http://oss.vvku.com/pic/vvku-dev/p/7c5eb05f3d7f30fec48f23cf44ce2e46_bzuqt3/0/0.jpg",
+                        "http://oss.vvku.com/pic/vvku-dev/p/caa508d15a191324d8bc31ee45532287_p5yc5n/0/0.jpg"],
+                    "des_nick":"20230064","giftcmd":"10355","RegionId":"1314","des_uin":"20230064",
+                    "des_icons":
+                        ["http://oss.vvku.com/pic/vvku-dev/p/b13148c481e4c3f6e896563f00d468d1_t5v1hx/0/0.jpg",
+                        "http://oss.vvku.com/pic/vvku-dev/p/7c5eb05f3d7f30fec48f23cf44ce2e46_bzuqt3/0/0.jpg",
+                        "http://oss.vvku.com/pic/vvku-dev/p/caa508d15a191324d8bc31ee45532287_p5yc5n/0/0.jpg"],
+                     "DayPropNum":1,"src_uin":20230064,"src_nick":"20230064","num":"1","prayStr":"","gifttype":1
+                    }
+               }
+          }
+
+}

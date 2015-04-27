@@ -1,0 +1,203 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>在线视频聊天</title>
+    <link rel="stylesheet" href="./app/src/css/base.css" type="text/css" />
+    <link rel="stylesheet" href="./app/src/css/room.css" type="text/css" />
+    <link rel="stylesheet" href="./app/src/css/public.css" type="text/css" />
+    <link rel="stylesheet" href="./app/src/css/device.css" type="text/css" />
+    <script type="text/javascript " src="./modules/jquery/jquery/1.9.1/jquery.js"></script>
+    <script type="text/javascript " src="./modules/jquery/jquery/1.9.1/jquery.tmpl.js"></script>
+    <script type="text/javascript " src="./modules/jquery/jquery/1.10.1/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="./modules/util/messenger.js"></script>
+    <script type="text/javascript" src="./modules/page/requireDate.js"></script>
+
+    <script type="text/javascript ">
+        $(function(){
+            $("#head").load ("app/header.html");
+            $("#host").load ("app/host.html");
+            $("#sofa").load ("app/sofa.html");
+            $("#deal").load ("app/deal.html");
+            $("#role").load ("app/role.html");
+            $("#rank").load ("app/rank.html");
+            $("#showInfo").load ("app/showInfo.html");
+            $("#guard").load ("app/guard.html");
+            $("#chat").load ("app/chat.html");
+            $("#flash").load ("app/flash.html");
+            $("#notice").load ("app/notice.html");
+            $("#footer").load ("app/footer.html");
+
+        });
+    </script >
+</head>
+<body  onload="onLoad()">
+<div class="page-area">
+    <!--头部导航start-->
+    <div class="header-room  fix" id="head">
+
+    </div>
+    <!--头部导航结束-->
+    <div class="room-area fixpgn fix">
+        <div class="live-area">
+            <div class="live-con fix">
+                <div class="column1">
+                    <!--主播信息start-->
+                    <div class="anchor-area" id="host">
+
+                    </div>
+                    <!--主播信息end-->
+                    <!--flash视频start-->
+                    <div id="flash">
+
+                    </div>
+                    <!--flash视频end-->
+                    <!--守护start-->
+                    <div class="safe-angel" id="guard">
+
+                    </div>
+                    <!--守护end-->
+                    <div class="room-gift-panel" id="room-gift-panel">
+                        <!--sofa start-->
+                        <div class="mySite" id="sofa">
+
+                        </div>
+                        <!--sofa end-->
+                        <!--送礼、道具 start-->
+                        <div class="gift-box" id="deal">
+
+                        </div>
+
+                        <!--送礼、道具 end-->
+                    </div>
+                    <!--/.room_gift-panel-->
+                </div>
+                <!--/.column1-->
+                <div class="column2">
+                    <!--站公告start-->
+                    <div class="room-blackboard" id="showInfo">
+
+                    </div>
+                    <!--站公告end-->
+                    <!--聊天室start-->
+                    <div id="chat"></div>
+                    <!--聊天室end-->
+                    <!--/.room_chat_panel-->
+                    <div class="col-viewer">
+                        <!--排行 start-->
+                        <div class="room-rank-panel" id="rank">
+
+                        </div>
+                        <!--排行 end-->
+                        <!--角色列表 start-->
+                        <div class="room-viewer-panel" id="role">
+
+                        </div>
+                        <!--角色列表 end-->
+
+                        <!--/.room-viewer-panel-->
+                        <div class="user-tool" id="footer">
+
+                        </div>
+                        <!--/.user-tool-->
+                    </div>
+                    <!--/.col-viewer-->
+                </div>
+                <!--/.column2-->
+            </div>
+            <!--/.live-con-->
+            <!-- 公告、广播 start -->
+            <div id="notice"></div>
+            <!-- 公告、广播 end -->
+        </div>
+        <!--/.live-area-->
+    </div>
+    <!--/.room-area-->
+</div>
+<!--/.page-area-->
+<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="0" height="0" id="ad_core" >
+    <param name="movie" value="ad_core.swf" />
+    <param name="quality" value="high" />
+    <param name="bgcolor" value="#ff0000" />
+    <param name="allowScriptAccess" value="sameDomain" />
+    <param name="allowFullScreen" value="true" />
+    <!--[if !IE]>-->
+    <object type="application/x-shockwave-flash" data="ad_core.swf" width="0" height="0">
+        <param name="quality" value="high" />
+        <param name="bgcolor" value="#ffffff" />
+        <param name="allowScriptAccess" value="sameDomain" />
+        <param name="allowFullScreen" value="true" />
+        <!--<![endif]-->
+        <!--[if gte IE 6]>-->
+        <p>
+            Either scripts and active content are not permitted to run or Adobe Flash Player version
+            11.0.0 or greater is not installed.
+        </p>
+        <!--<![endif]-->
+        <a href="http://www.adobe.com/go/getflashplayer">
+            <img src="http://www.adobe.com/images/shared/download_buttons/get_flash_player.gif" alt="Get Adobe Flash Player" />
+        </a>
+        <!--[if !IE]>-->
+    </object>
+    <!--<![endif]-->
+</object>
+
+<!--开通守护-->
+
+
+
+
+
+
+
+<div class="giftShapeBox" style="left: 100px; top: 550px; display: none; ">
+    <div class="giftTab">
+        <a href="" class="giftBtab">标准图形</a>
+        <a href="" class="giftMtab"><i></i>我的图形</a>
+    </div>
+    <div class="giftBase">
+        <a href="" sys="50" class="s1">V(50个)</a>
+        <a href="" sys="99" class="s2">心(99个)</a>
+        <a href="" sys="100" class="s3">笑脸(100个)</a>
+        <a href="" sys="300" class="s4">LOVE(300个)</a>
+        <a href="" sys="520" class="s5">爱之箭(520个)</a>
+        <a href="" sys="999" class="s6">比翼双飞(999个)</a>
+        <a href="" sys="1314" class="s7">一生一世(1314个)</a>
+        <a href="" sys="3344" class="s8">生生世世(3344个)</a>
+    </div>
+    <div class="giftMy">
+        <p class="giftMyList"></p>
+        <p class="giftMyDraw">
+            <a href="" class="draw_btn">开始画图</a>
+        </p>
+    </div>
+</div>
+<script src="./modules/seajs/seajs/2.1.1/sea.js"></script>
+<script>
+    seajs.config({
+        base: "./modules/",
+        alias: {
+            //"template": "jquery/jquery/1.10.1/jquery.tmpl.min.js",
+            "jQuery": "jquery/jquery/1.9.1/jquery.js"
+        }
+    });
+    // For development
+    if (location.href.indexOf("?dev") < 0) {
+        seajs.use("page/index");
+    }
+// For production
+    else {
+        seajs.use("/examples/header/src/main");
+    }
+</script>
+<script type="text/javascript" src="./modules/util/md5.js"></script>
+<script type="text/javascript" src="./modules/util/swfobject.js"></script>
+<script type="text/javascript" src="./modules/interface/serverMsgManager.js"></script>
+<script type="text/javascript" src="./modules/interface/testInterface.js"></script>
+<script type="text/javascript" src="./modules/page/web-room.js"></script>
+<!--<script type="text/javascript" src="history.js"></script>-->
+<script type="text/javascript" src="./vvMedia.js"></script>
+
+
+</body>
+</html>

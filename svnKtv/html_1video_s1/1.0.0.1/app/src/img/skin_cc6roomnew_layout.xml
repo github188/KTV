@@ -1,0 +1,82 @@
+<ktv minWidth="1280" minHeight="785" maxWidth="1630" name="g3_ktv" showbg="true" bgcolor="">
+	<screen name="Live">
+		<!--
+		percentWidth percentHeight  width height x y top right left bottom verticalCenter horizontalCenter
+		-->
+		<!-- 直播界面 -->
+		<module name="module_liveface" left="118" top="118" right="118" bottom="6">
+			<videomain x="4" y="105" width="466" height="340"/>
+			<show_controlsound>false</show_controlsound>
+		</module>
+		<module name="module_title" percentWidth="100" height="31" x="0" top="0">
+		<show_switch_btn>false</show_switch_btn>
+		<!-- 设置title栏是否显示界面切换图标 -->
+		</module>
+		<!-- 设置礼物播放横幅 -->
+		<module name="module_screan" left="118" right="118" height="45" x="0" top="68"/>
+        <!--显示3条大礼物消息-->
+		<module name="module_screan_6room"  height="96" top="129" left="587" right="128"/>
+		<!--主播信息显示模块-->
+		<module name="module_anchorMsg" left="128" width="454"  height="100" top="129">
+			<colRoom_btn right= "20"  top = "10"/>
+			<attention_btn right= "20"  top = "50"/>
+		</module>
+		<!-- 用户列表 -->
+		<module name="module_userlist" width="228" bottom="70" right="128" top="229">
+		<show_grouplist>false</show_grouplist>
+		<!-- 是否显示群组TAB列表 -->
+		</module>
+		<!--
+		公告栏
+			<module name="module_notice"        width="230" height="268" x="2" top="77"/> 
+		-->
+		<!-- 管理等按钮 -->
+		<module name="module_managerbutton" bottom="18" height="50" width="228" right="128">
+			<gl_button  x="10" y="0"/>
+			<sz_button  x="50" y="0"/>
+			<yq_button  x="90" y="0"/>
+			<gb_button  x="130" y="0"/>
+			<parking_button  x="170" y="0"/>
+		</module>
+		<!-- 麦序列表  -->
+		<module name="module_miclist" left="128" width="190" height="230" top="280"/>
+		<!-- 底部 排行榜  聊天区   礼物列表 -->
+		<module name="module_rank" width="223" top="649" x="0" y="0" left="128" bottom="18"/>
+		<module name="module_commom_chat" top="229" bottom="18" left="586" right="358">
+		<bshowsysinpublic>false</bshowsysinpublic><!--是否在公聊中显示系统消息-->
+			<Tab x="0" y="0" left="0" right="0" height="30" >
+				<publicchat  left="0" right="0" top="30" height="298" alpha="0.8"/> 
+				<giftchat  left="0" right="0" top="30" height="298" alpha="0.8"/>
+			</Tab>
+			<systemchat left="0" right="0" top="329" bottom="120" alpha="0.8"/>
+			<buttonchat height="52" bottom="69" left="-1" right="-1">
+				<talkTo_comboBox x="4" y="28" width="80" height="20" />
+				<privateChat_checkBox x="89" y="28"/>
+				<emotion_btn x="5" y="4" />
+				<color_btn  x="30" y="4"  />
+				<stamp_btn  x="55" y="4" />
+				<personalMic_btn  x="80" y="4" />
+				<dice_btn  x="105" y="4" />
+				<clockScreen_btn x="130" y="4"/>
+				<set_btn x="155" y="4" />
+				<popularVotes_btn x="180" y="4" />
+			</buttonchat>
+			<inputchat left="0"  right="0" bottom="0" height="72"/>
+			<ceMessage  left="2" right="2" top="330" height="20"/>
+		
+	    </module>
+		<module name="module_gift" width="230" top="649" left="353" bottom="18"/>
+		<module name="module_modmanager" width="276" height="300" x="1610" y="490"></module>
+		<!-- 系统广播 -->
+		<module name="module_broadcast" width="276" height="45" horizontalCenter="-28" top="228"/>
+		<!-- 密麦列表 -->
+		<module name="module_secretmic" bottom="139" left="274" right="363" height="52"/>
+		<module name="module_gift_pop" top="169" right="303"/>
+		<!--抢沙发模块-->
+		<module name="module_sofa" left="128" width="454" height="90" top="557"/>
+		<!--守护列表-->
+		<module name="module_guardList"  left="0" width="118" height="500" top="228"/>
+		<!--点歌模块-->
+        <module name="module_vodsystem" left="726" top="231" width="71" height="26" />
+	</screen>
+</ktv>

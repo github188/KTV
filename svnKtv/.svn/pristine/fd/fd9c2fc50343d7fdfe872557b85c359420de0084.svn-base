@@ -1,0 +1,158 @@
+<!--顶部导航-->
+<div class="blackbg"></div>
+<div class="logo subnavItem" title="返回到首页" name="home"><a href="http://20229998.test.vvku.com/index.html">六间房</a><span id="roomId">房间标题文字</span></div>
+<div class="topmenu">
+    <ul>
+        <li class="navItem"><a href="http://20229998.test.vvku.com/index.html" class="one">大厅首页</a></li>
+        <li class="navItem"><a href="#">商城</a></li>
+        <li class="navItem"><a href="http://20229998.test.vvku.com/top.html">排行榜</a></li>
+    </ul>
+</div>
+<div class="userPanel" id="userPanel">
+    <ul  id="header">
+        <li class="userid navItem"><img src="./src/img/NetLight1.png" width="14" height="12" /></li>
+        <li id ="myName" class="userid navItem"><span id="userName" ></span>
+            <div id="myInfo" class="interactBox" style="display:none">
+                <div class="interactMask">
+                    <div class="person-wrap fix">
+                        <div class="person-img">
+                            <img id="myPic"  width="65" height="65" />
+                        </div>
+                        <div class="person-info" id="myInfoDiv">
+                        </div>
+                    </div>
+                    <div>
+                        <div class="interactbar">
+                            <p><i class="arrow-down"></i>与Ta互动</p>
+                        </div>
+                        <div class="interact-way">
+                            <a class="arrow-left" href="#"></a>
+                            <a class="arrow-right" href="#"></a>
+                            <ul class="fix">
+                                <li><img src="./app/src/img/ml.png" width="18" height="18" /></li>
+                                <li><img src="./app/src/img/l1.png" width="18" height="18" /></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div style="height:48px">
+                        <div class="interactbar">
+                            <p><i class="arrow-down"></i>荣誉等级</p>
+                        </div>
+                        <div class="interact-way">
+                            <a class="arrow-left" href="#"></a>
+                            <a class="arrow-right" href="#"></a>
+                            <span class="fix" id="myLevel">
+
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </li>
+        <li class="userid navItem"><a href="#">大厅首页</a></li>
+        <li class="account navItem" id="m"><a href="#" class="br">账号管理 <i class="arrow"><img src="../app/src/img/scollbar/arrowDown.png" width="8" height="8" /></i></a>
+            <ul class="subnav" id="mm" style="display:none;margin-top:-7px">
+                <li class="itemW"  id="manager" ><a href="#">账户管理</a></li>
+                <li class="itemW" id="safe" ><a href="#">安全中心</a></li>
+                <li class="itemW"  id="weibo" ><a href="#">微博首页</a></li>
+                <li class="itemW"  id="changeT" ><a href="#">修改头像</a></li>
+                <li class="itemW"  id="changeN" ><a href="#">修改昵称</a></li>
+                <li  class="xxYy itemW"  id="chatSet" ><a href="#">聊天设置</a></li>
+                <li  class="xxYy itemW"  id="saZiSet"><a href="#">骰子设置</a></li>
+            </ul>
+        </li>
+        <li name="" id="status">
+            <span style="display:none" id="changeUser"  class="status"><a  href="#">切换账号</a></span>
+            <!--<span style="display:none" id="logout"  class="status"><a  href="#">退出</a></span>-->
+            <span style="display:none" id="login"  class="status"><a href="#">登录</a></span>
+            <span style="display:none" id="register"  class="status"><a href="#">注册</a></span>
+        </li>
+    </ul>
+</div>
+
+<div id="saZiSetBox"class="dicesetBox" style="display:none">
+    <div class="dicesetMask">
+        <em class="close dealSaZi" id="btn_saZi_close" title="关闭">关闭</em>
+        <h5 class="head">骰子设置</h5>
+        <div class="overFrameContent">
+            <p>
+                <label><input name="open" type="radio" value="1"/>启用</label>
+                <label><input name="open" type="radio" value="0" />禁用</label>
+            </p>
+            <p>点数范围：<input name="diceNum" id="diceNum" type="text" class="inputcs"/>秒  <span>（1-99，如填99，则范围1-99）</span></p>
+            <p>摇动时间间隔：<input name="diceTim" id="diceTim" type="text"  class="inputcs"/>秒</p>
+            <div class="rulewrap">
+                <h4><label><input name="openControl" id="openControl" type="checkbox" value="0"/></label>启动规则控制</h4>
+                <div id="control" name="control">
+                    <h5><input name="rule" type="radio" value="1" class="controlW control1" checked="checked"/>规则一：</h5>
+                    <p><input name="" type="text" value="15" class="inputcs controlW controlW1"/>秒后结束（一局结束时间最短为15秒）</p>
+                    <p><label><input name="" type="checkbox" value="0" class="controlW controlW1" />显示摇出点数最大者</label></p>
+                    <p><label><input name="" type="checkbox" value="1" class="controlW controlW1" />显示摇出点数最小者</label></p>
+                    <h5><input name="rule" type="radio" value="2" class="controlW control2" />规则二：</h5>
+                    <p>摇出<input name="" type="text" value="8" class="inputcs controlW controlW2"/>点后结束并显示摇中点数者</p>
+                    <h5>规则设置：</h5>
+                    <p><label><input name="" type="checkbox" value="0" class="controlW controlW2"/>可重复摇骰子</label></p>
+                    <p>下局开始时间：<input name="" type="text" value="5" class="inputcs controlW controlW2"/>秒</p>
+                </div>
+            </div>
+            <div class="btnwrap">
+                <input type="button"  class="btn dealSaZi confirm-btn" id="btn_saZi_sure" value="确定"/>
+                <input type="button"  class="btn dealSaZi cancel-btn" id="btn_saZi_cancel" value="取消"/>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+<div id="logon" class="loginBox" style="display:none">
+    <div class="loginMask">
+        <em class="close" title="关闭">关闭</em>
+        <h5 class="login-head">立即登录，您就可以与主播聊天互动了</h5>
+        <div class="overFrameContent">
+            <div class="side">
+                <p>
+                    <span>使用QQ登录，直接分享动态到空间。</span>
+                    <span class="partner">
+                        <a href="#" class="loginWith loginWith-qq btn" title="使用QQ登录"></a>
+                    </span>
+                </p>
+            </div>
+            <div class="vlogin">
+                <dl>
+                    <dd class="ddusr fix">
+                        <label>
+                            <span>通行证：</span>
+                        </label>
+                        <div class="input">
+                            <input type="text" id="login_username"name="username" class="input-text" />
+                        </div>
+                    </dd>
+                    <dd class="ddpsw fix">
+                        <label>
+                            <span>密码：</span>
+                        </label>
+                        <div class="input">
+                            <input type="password" id="login_passWd" name="passwd" class="input-text" />
+                        </div>
+                    </dd>
+                    <dd class="loginbtn fix">
+                        <input type="button" id="btn_log" value="登录" class="loogerbtn btn" />
+                        <label><input type="checkbox" checked="checked" />下次自动登录</label>
+                    </dd>
+                    <dt class="protocol fix">
+                        <a id="btn_gus"  href="#" class="btn">游客登录</a>
+                        <a id="btn_reg"  href="#"class="btn">立即注册</a>
+                        <a id="btn_forgot" class="gray btn" href="#" >忘记密码？</a>
+                    </dt>
+                </dl>
+            </div>
+            <div class="middle"><i></i></div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,17 @@
+<!--守护-->
+    <h4 class="safe-head">
+        <a href="#" target="_blank" title="开通守护">开通</a>
+        <p class="online">开通守护</p>
+        <em><span id="online"></span> / <span id="all"></span> </em>
+    </h4>
+    <div class="safe-body">
+        <div class="safe-list">
+            <div class="jscroll-c">
+                <ul id="guardList">
+
+                </ul>
+            </div>
+        </div>
+    </div>
+
+

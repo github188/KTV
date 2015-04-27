@@ -1,0 +1,18 @@
+var parentData=null;
+var session;
+var groupId;
+var roomId;
+var loginUrl;
+var uin;
+var messenger = new Messenger("home");
+messenger.addTarget(window.parent,'parent');
+messenger.targets["parent"].send("1");
+messenger.listen(function (data) {
+    parentData = JSON.parse(data);
+    roomId = parentData.roomid||"5880309";
+    groupId = parentData.GroupId||"20229998";
+    uin =parentData.uin||"20229998";
+    session =parentData.sessionkey||"47659C2A6078855BB72CEEF680249EFC";
+    loginUrl = parentData.url;
+
+});

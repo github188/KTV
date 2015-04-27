@@ -1,0 +1,137 @@
+@charset "utf-8";
+/* CSS Document */
+.safe-angel {
+	position: absolute;
+	top: 0;
+	left: -125px;
+	border: 3px solid #f4d175;
+	border-radius:10px;
+	-webkit-border-radius:10px;
+	-moz-border-radius:10px;
+	width: 120px;
+	background:#6b6d6d;
+}
+.safe-angel .safe-head {
+	position: relative;
+	height: 50px;
+	padding: 6px 0;
+	background: #474a4b;
+	margin: 5px;
+	padding-left: 40px;
+	font-size: 12px;
+	z-index: 3;
+	border-radius:5px;
+	-webkit-border-radius:5px;
+	-moz-border-radius:5px;
+}
+.safe-angel .safe-head a {
+	position: absolute;
+	left: 5px;
+	top: 5px;
+	display: block;
+	width: 27px;
+	height: 29px;
+	overflow: hidden;
+	line-height: 100em;
+	background:url("../img/iconSH01.png") no-repeat 0 0;
+}
+.safe-angel .safe-head .online {
+	font-weight: normal;
+	color: white;
+	margin:3px 0 10px;
+}
+.safe-angel .safe-head em{
+	color:#fff;
+	font-style:normal;
+	font-weight:normal;
+	padding-left:15px;
+	background:url("../img/iconSH02.png") no-repeat 0 0;
+}
+.safe-angel .safe-body {
+	position: relative;
+}
+.safe-angel .safe-list {
+	height: 100px;
+	position: relative;
+	overflow: hidden;
+}
+.safe-list .off-line{
+	margin-top:5px;
+}
+.safe-list .off-line a{
+	text-decoration:none;
+}
+.safe-list .off-line .type{
+	width: 17px;
+	height: 19px;
+	display:block;
+	float:left;
+	background:url("../img/iconSH03.png") no-repeat 0 0;
+}
+.safe-list .off-line .avatar{
+	width:25px;
+	height:25px;
+	float:left;
+	margin:0 5px;
+}
+.safe-list .off-line .name{
+	color:#fff;
+	height:25px;
+	line-height:25px;
+	width:5em;
+	display:block;
+	overflow:hidden;
+	text-overflow:ellipsis;
+	-o-text-overflow:ellipsis;
+	white-space:nowrap;
+}
+
+
+
+
+
+
+
+
+.giftShapeBox {
+	display: none;
+	width: 169px;
+	background: white;
+	border: 1px solid #CCC;
+	height: 201px;
+	position: absolute;
+	z-index: 1002;
+	box-shadow: 0 0 4px rgba(0,0,0,0.2);
+}
+.giftShapeBox .giftTab a.giftBtab {
+	border-right: 1px solid #CCC;
+	color: #333;
+}
+.giftShapeBox .giftTab a {
+	width: 82px;
+	height: 30px;
+	line-height: 30px;
+	display: inline-block;
+	text-decoration: none;
+	text-align: center;
+}
+.giftShapeBox .giftTab a.giftMtab {
+	border-bottom: 1px solid #CCC;
+	color: #999;
+}
+.giftShapeBox .giftBase {
+	overflow: auto;
+	height: 170px;
+}
+.giftShapeBox .giftBase a {
+	text-indent: 46px;
+	background: url(http://vr0.6.cn/imges/live/CSSIMG/giftShape_v9.png) no-repeat 5px -27px;
+}
+.giftShapeBox .giftBase a, .giftShapeBox .giftMy a {
+	font-weight: normal;
+	text-align: left;
+	display: block;
+	height: 42px;
+	line-height: 42px;
+	color: #434343;
+}

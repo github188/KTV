@@ -1,0 +1,4 @@
+/* This CSS stylesheet defines styles used by vv video in a html page */
+/* The link must be like this <link rel="stylesheet" type="text/css" href="vvVideo.css" /> */
+
+#flashContent { display:none; }

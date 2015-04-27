@@ -1,0 +1,38 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+    <script type="text/javascript" src="http://static.vvku.com/web/4/frontend/base/jquery/jquery.min.js"></script>
+    <script type="text/javascript">
+          $(function(){
+              $.ajax({
+                  url:"xmlData.xml",
+                  dataType :"xml",
+                  success :function(xml){
+                      var arry = ["emotion","wealth","gift","tab4","tab5"];
+                      var obj = {},pre=[];
+                      $(arry).each(function(index, value){
+                          var item = $(xml).find(value).find('item');
+
+                          $.each(item, function(idx, itemObj){
+                              //   {
+                              //    "emotion" ；｛
+                              //          name:
+                              //       ｝
+                              // }
+                                //obj[value][itemObj.attr(itemObj.attributes[idx])] =
+                              var keys = itemObj.attributes;//["name",img=""]
+                              console.log(keys[0]);
+
+                          })
+                      });
+                  }
+              });
+          });
+
+    </script>
+</head>
+<body>
+    <div></div>
+</body>
+</html> 

@@ -1,0 +1,9 @@
+{"obj":
+        {"songMoney":100000,
+         "guardInfoList":[
+                             {"expire":"1","id":"197","label":"黄金守护","price":"166334"}
+                          ],
+          "roomMoney":5000,
+            "groupMoney":20000
+        },
+   "__ack":19,"cmd":"CMD_ROOMINFO"}

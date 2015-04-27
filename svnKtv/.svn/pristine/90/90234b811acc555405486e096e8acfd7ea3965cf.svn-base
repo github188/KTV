@@ -1,0 +1,92 @@
+@charset "utf-8";
+/* CSS Document */
+html,body,div,p,h1,h2,h3,h4,blockquote,pre,form,fieldset,ol,ul,li,dl,dd,dt,table,tbody,thead,tfoot,tr,th,td {
+	margin: 0;
+	padding: 0;
+}
+body {
+	font: 12px/1.5 Tahoma,"宋体";
+	color: #333;
+}
+.ft_yh {
+	font-family: "Microsoft Yahei",sans-serif;
+}
+img {
+	border: 0;
+}
+button {
+	vertical-align: middle;
+	cursor: pointer;
+}
+input,img {
+	vertical-align: middle;
+}
+input,textarea {
+	font-size: inherit;
+}
+textarea {
+	border-style: solid;
+	border-width: 1px;
+	border-color: #CECECE;
+	padding: 4px 4px 2px;
+	background: #FFF url("http://vr0.6.cn/imges/live/CSSIMG/textInputBg.png") no-repeat 0 0;
+	resize: vertical;
+	overflow-y: auto;
+}
+ul,ol {
+	list-style: none;
+}
+table {
+	border-collapse: collapse;
+}
+table th a {
+	color: #000;
+}
+table th a.on {
+	font-weight: 700;
+	text-decoration: none;
+}
+a {
+	outline: 0;
+	color: #f09;
+	text-decoration: none;
+}
+a:hover {
+	color: #f09;
+	text-decoration: underline;
+}
+em {
+	font-style: normal;
+}
+i {
+	font-style: normal;
+	vertical-align: middle;
+	display: inline-block;
+	*zoom: 1;
+	*display: inline;
+}
+fieldset {
+	border: 0;
+}
+legend {
+	display: none;
+}
+h1,h2,h3,h4,h5,h6 {
+	font-size: 14px;
+	margin:0;
+	padding:0;
+}
+.clear {
+	clear: both;
+}
+.fix {
+	zoom: 1;
+}
+.fix:after,.headWrap:after,.topNav:after,.headCon:after {
+	content: ".";
+	display: block;
+	clear: both;
+	height: 0;
+	visibility: hidden;
+	font-size: 0;
+}

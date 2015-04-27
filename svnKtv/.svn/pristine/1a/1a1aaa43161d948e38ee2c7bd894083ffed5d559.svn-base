@@ -1,0 +1,6 @@
+<div class="player">
+    <a href="#" class="btn-play">开始直播</a>
+    <p>本房间没有直播</p>
+</div>
+
+<object id="somebody" style="display:none"></object>

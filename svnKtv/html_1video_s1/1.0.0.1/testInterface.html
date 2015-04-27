@@ -1,0 +1,463 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <script type="text/javascript " src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
+    <script type="text/javascript" src="http://www.veryhuo.com/uploads/Common/js/jQuery.md5.js"></script> 
+    <script type="text/javascript" src="static/JS/json.js"></script> 
+    <script type="text/javascript" src="static/JS/md5.js"></script> 
+    <script type="text/javascript" src="static/JS/swfobject.js"></script>
+    <script type="text/javascript" src="serverMsgManager.js"></script>
+    <script type="text/javascript" src="testInterface.js"></script>
+    <script type="text/javascript ">
+        var ad_core;
+        var ad_video;
+        var roomid = 5880330;
+        var uin = "20226538";
+        var groupId = 20230024;
+        var session = "03F6DA3E4F7716B2F3BE2142A691D800";
+        var loginUrl = "ws://192.168.1.58:8365/client";
+        var bLoginSucess = false;
+        var testInterface = new testInterface();
+        testInterface.session = session;
+        testInterface.selfUin = uin;
+
+        var mainVideoUin = null;
+        var manage1VideoUin = null;
+        var manage2VideoUin = null;
+
+        var chat = new serverMsgManager();
+        function onload() {
+            ad_core = swfobject.getObjectById("ad_core");
+            if(!ad_core){
+                alert("err");
+                return;
+            }
+            ad_core.flash_InitCore();
+
+            // testInterface.Login(loginUrl,uin,session,roomid,"",groupId);
+            alert("初始化成功");
+        }
+
+        function getHost(){
+            return "http://20230024.test.vvku.com";
+        }
+
+        function js_OnLoginSuccess(data,brelogin){
+            bLoginSucess = true;
+
+            testInterface.selfUin = data.uin;
+            var logTextArea = document.getElementById("chat_server");
+            if(logTextArea)
+                logTextArea.value = "登录成功:" + JSON.stringify(data) + "\n" + logTextArea.value;
+        }
+
+        function js_OnLogout(reason){
+            bLoginSucess = false;
+
+            var logTextArea = document.getElementById("chat_server");
+            if(logTextArea)
+                logTextArea.value = "登出:" + JSON.stringify(data) + "\n" + logTextArea.value;
+        }
+
+        function js_OnLoginFail(data){
+            // chat.LoginFail(data);
+            bLoginSucess = false;
+           var logTextArea = document.getElementById("chat_server");
+            if(logTextArea)
+                logTextArea.value = "登录失败:" + JSON.stringify(data) + "\n" + logTextArea.value;
+        }
+
+        function js_OnLogold(str){
+            // chat.LogOld(str); 
+            bLoginSucess = false;  
+            var logTextArea = document.getElementById("chat_server");
+            if(logTextArea)
+                logTextArea.value = "被挤出房间:" + JSON.stringify(data) + "\n" + logTextArea.value;
+        }
+
+        function js_OnServerData(data){
+
+            // chat.OnServerMessage(data);
+            if(data.cmd != "CMD_ECHO") {
+                if(data.cmd == "CMD_REQUESTUPMIC") {
+                    chat.SendToServer({cmd:"CMD_REQUESTUPMIC", bRequest:true, type:data.type, uin:data.uin, desuin:data.desuin, num:data.num});
+                } else if(data.cmd == "MAINVIDEO" && "STATUS" == data.op) {
+                    if(data.mainVideo != null && data.mainVideo.uin != null) {
+                        mainVideoUin = data.mainVideo.uin;
+                    } else {
+                        mainVideoUin = null;
+                    }
+                } else if(data.cmd == "SMALLVIDEO") {
+                    if(data.mic1 == null) {
+                        manage1VideoUin = null;
+                    } else {
+                        manage1VideoUin = data.mic1.uin;
+                    }
+
+                    if(data.mic2 == null) {
+                        manage2VideoUin = null;
+                    } else {
+                        manage2VideoUin = null;
+                    }
+                }
+                var logTextArea = document.getElementById("chat_server");
+                if(logTextArea)
+                    logTextArea.value = "收:" + JSON.stringify(data)+ "\n" + logTextArea.value;
+            }
+
+        }
+
+        function js_HttpBack(data, id) {
+            chat.OnHttpRequestCallBack(data, id);
+        }
+
+        function OnLoginClick() {
+            if(!document.getElementById("title_username") || document.getElementById("title_username").value == "") {
+                alert("用户名不能为空");
+                return;
+            }
+
+             if(!document.getElementById("title_password") || document.getElementById("title_password").value == "") {
+                alert("密码不能为空");
+                return;
+            }
+
+            testInterface.ReqLogin(document.getElementById("title_username").value, document.getElementById("title_password").value);
+        }
+
+        function OnLogoutClick() {
+            if(bLoginSucess) {
+                // testInterface.ReqLogout();
+            } else {
+                alert("请先登录");
+            }
+        }
+
+        function OnReqGiftList() {
+            if(bLoginSucess) {
+                testInterface.ReqGiftList();
+            } else {
+                alert("请先登录");
+            }
+        }
+
+        function OnReqStampList() {
+            if(bLoginSucess) {
+                testInterface.ReqStampList();
+            } else {
+                alert("请先登录");
+            }
+        }
+
+        function OnReqEmotionList() {
+            if(bLoginSucess) {
+                testInterface.ReqEmotionList();
+            } else {
+                alert("请先登录");
+            }
+        }
+
+        function OnReqGetCollectRoom() {
+            if(bLoginSucess) {
+                testInterface.ReqGetCollectRoom();
+            } else {
+                alert("请先登录");
+            }
+        }
+
+        function OnReqCollectRoom() {
+            if(bLoginSucess) {
+                testInterface.ReqCollectRoom();
+            } else {
+                alert("请先登录");
+            }
+        }
+
+        function OnReqColorBar() {
+            if(bLoginSucess) {
+                testInterface.ReqColorBar();
+            } else {
+                alert("请先登录");
+            }
+        }
+
+        function OngetUserMessage() {
+            if(bLoginSucess) {
+                testInterface.getUserMessage();
+            } else {
+                alert("请先登录");
+            }
+        }
+
+        function OnUpMic() {
+            if(bLoginSucess) {
+                var index = document.getElementById("videoIndex").value;
+                if(index == "") {
+                    alert("填写视频index");
+                    return;
+                }
+
+                var uin = document.getElementById("videouser").value;
+                if(uin == "") {
+                    alert("填写用户id");
+                    return;
+                }
+
+                if(0 == index) {
+                    chat.SendToServer({cmd:"MAINVIDEO", op:"UP", desuin:uin});
+                } else if(1 == index || 2 == index) {
+                    chat.SendToServer({cmd:"SMALLVIDEO", op:"UP", index:index, desuin:uin});
+                }
+            } else {
+                alert("请先登录");
+            }
+        }
+
+        function OnDownMic() {
+            if(bLoginSucess) {
+                var index = document.getElementById("videoIndexdown").value;
+                if(index == "") {
+                    alert("填写视频index");
+                    return;
+                }
+
+                var uin = document.getElementById("videouserdown").value;
+                if(uin == "") {
+                    alert("填写用户id");
+                    return;
+                }
+
+                alert(mainVideoUin + "    " + manage1VideoUin + "    " + manage2VideoUin);
+                if(0 == index) {
+                    if(mainVideoUin != null) {
+                        chat.SendToServer({cmd:"MAINVIDEO", op:"DOWN", desuin:mainVideoUin});
+                    }
+                } else if(1 == index) {
+                    chat.SendToServer({cmd:"SMALLVIDEO", op:"DOWN", index:index, desuin:manage1VideoUin});
+                } else if(2 == index) {
+                    chat.SendToServer({cmd:"SMALLVIDEO", op:"DOWN", index:index, desuin:manage2VideoUin});
+                }
+            } else {
+                alert("请先登录");
+            }
+        }
+
+        function sendto() {
+            var uin = document.getElementById("talkto").value;
+            if(uin == "") {
+                alert("填写用户id");
+                return;
+            }
+
+            var talktext = document.getElementById("talkText").value;
+            if(talktext == "") {
+                alert("没有聊天内容");
+                return;
+            }
+
+            chat.SendToServer({cmd:"CHAT_TEXT", des_uin:uin, text:talktext, bSecret:false});
+        }
+
+        function OnSendGift() {
+            var uin = document.getElementById("giftTo").value;
+            if(uin == "") {
+                alert("填写用户id");
+                return;
+            }
+
+            var num = document.getElementById("giftNum").value;
+            if(num == "") {
+                alert("填写礼物数量");
+                return;
+            }
+
+            var giftcmd = document.getElementById("giftCmd").value;
+            if(giftcmd == "") {
+                alert("填写礼物cmd");
+                return;
+            }
+            
+            var pkt = { cmd:"CMD_MOD" };        
+            pkt.msg = {
+                cmd:"CMD_GIFT"
+            }
+            
+            
+            pkt.msg.msg = {
+                cmd:"SEND_GIFT",
+                // id:giftObj.ID,
+                num:num,
+                des_uin:uin,
+                // des_nick:giftlogic.sendToUser.nick,
+                // giftname:giftObj.PropsName,
+                giftcmd:giftcmd,
+                gifttype: 1,//giftObj.giftType,
+                RegionId:"1314",
+                prayStr:"",
+                groupName:""
+            };
+            chat.SendToServer(pkt);
+        }
+
+        function OnSofa() {
+            if(mainVideoUin == null) {
+                alert("视频上没有人");
+                return;
+            }
+
+            var num = document.getElementById("sofaNum").value;
+            if(num == "" || num <= 0) {
+                alert("抢沙发数量不对");
+                return;
+            }
+
+            // var sofaid = document.getElementById("sofaID").value;
+            // if(sofaid == "" || sofaid <= 0) {
+            //     alert("抢沙发ID不对");
+            //     return;
+            // }
+
+            var sofaindex = document.getElementById("sofaIndex").value;
+            if(sofaindex == "" || sofaindex <= 0) {
+                alert("沙发index不对");
+                return;
+            }
+
+            var pkt = {
+                cmd:"CMD_MOD"
+            }
+            pkt.msg = {
+                cmd:"CMD_GIFT"
+            }
+            pkt.msg.msg = { 
+                cmd:"CMD_SOFA",
+                msg:{
+                    id:"10475", // sofaid,
+                    num:num,
+                    des_uin:mainVideoUin,
+                    giftname:"抢沙发", //m_sofaObj.gifname,
+                    giftcmd:"10475",
+                    gifttype:1,
+                    RegionId:"1314",
+                    prayStr:"",
+                    groupName:"",
+                    index:sofaindex}
+            }
+            chat.SendToServer(pkt);
+        }
+
+        function OnGuard() {
+            var num = document.getElementById("guardNum").value;
+            if(num == "" || num <= 0) {
+                alert("守护数量不对");
+                return;
+            }
+
+            var uin = document.getElementById("VideoID").value;
+            if(uin == "" || uin <= 0) {
+                alert("守护对象不对");
+                return;
+            }
+
+            var guardid = document.getElementById("guardID").value;
+            if(guardid == "") {
+                alert("守护id不对");
+                return;
+            }
+
+            chat.SendToServer({cmd:"CMD_BUYGUARD", num:num, uin:uin, id:guardid});
+        }
+    </script >
+
+</head>
+<body onload="onload()">
+<table width="100%" height="100%" border="8">
+    <tr width="100%" height="30" >
+        <td><label>用户名:</label><input id="title_username" /><label>密码:</label><input id="title_password" /></td>
+        <td>
+            <button onclick="OnLoginClick()">登录</button><button onclick="OnLogoutClick()">登出</button>
+            <button onclick="OnReqGiftList()">请求礼物列表</button>
+            <button onclick="OnReqStampList()">获取印章列表</button>
+            <button onclick="OnReqEmotionList()">获取表情列表</button>
+            <button onclick="OnReqGetCollectRoom()">是否已经收藏房间</button>
+            <button onclick="OnReqCollectRoom()">收藏房间</button>
+            <button onclick="OnReqColorBar()">请求彩条列表</button>
+            <button onclick="OngetUserMessage()">获取用户个人信息</button>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <label>视频index</label><input id="videoIndex"/>
+            <label>上视频用户uin</label><input id="videouser"/>
+            <button onclick="OnUpMic()">上视频</button>
+        </td>
+        <td>
+            <label>视频index</label><input id="videoIndexdown"/>
+            <label>上视频用户uin</label><input id="videouserdown"/>
+            <button onclick="OnDownMic()">下视频</button>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <label>对:</label><input id="talkto" ></input><label>说</label><input id="talkText" ></input><button onclick="sendto()">发送</button>
+        </td>
+        <td>
+            向<input id="giftTo" ></input>送<input id="giftNum"></input>个(礼物cmd)<input id="giftCmd"></input><button onclick="OnSendGift()">赠送</button>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            抢沙发个数:<input id="sofaNum"></input>沙发index<input id="sofaIndex"></input><button onclick="OnSofa()">抢沙发</button>
+        </td>
+        <td>
+            购买守护对象id<input id="VideoID"></input>购买数量<input id="guardNum"></input>购买守护id<input id="guardID"></input><button onclick="OnGuard()">购买守护</button>
+        </td>
+    </tr>
+    <tr>
+        <table width="100%" height="100%" >
+            <tr>
+                <td width="50%">
+                    <label>服务器消息</label></br>
+                    <textarea id="chat_server" style="width:100%; height:400px;"></textarea>
+                </td>
+                <td width="50%">
+                    <label>http请求返回</label></br>
+                    <textarea id="chat_Req" style="width:100%; height:400px;">
+                    </textarea>
+                </td>
+            </tr>
+        </table>
+    </tr>
+</table>
+
+<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="0" height="0" id="ad_core">
+    <param name="movie" value="ad_core.swf" />
+    <param name="quality" value="high" />
+    <param name="bgcolor" value="#ff0000" />
+    <param name="allowScriptAccess" value="sameDomain" />
+    <param name="allowFullScreen" value="true" />
+    <!--[if !IE]>-->
+    <object type="application/x-shockwave-flash" data="ad_core.swf" width="0" height="0">
+        <param name="quality" value="high" />
+        <param name="bgcolor" value="#ffffff" />
+        <param name="allowScriptAccess" value="sameDomain" />
+        <param name="allowFullScreen" value="true" />
+    <!--<![endif]-->
+    <!--[if gte IE 6]>-->
+        <p> 
+            Either scripts and active content are not permitted to run or Adobe Flash Player version
+            11.0.0 or greater is not installed.
+        </p>
+    <!--<![endif]-->
+        <a href="http://www.adobe.com/go/getflashplayer">
+            <img src="http://www.adobe.com/images/shared/download_buttons/get_flash_player.gif" alt="Get Adobe Flash Player" />
+        </a>
+    <!--[if !IE]>-->
+    </object>
+    <!--<![endif]-->
+</object>
+            
+</body>
+</html>
+

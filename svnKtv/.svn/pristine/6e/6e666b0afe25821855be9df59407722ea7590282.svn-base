@@ -1,0 +1,14 @@
+{
+    "roomid":5880309,
+    "arr":[
+        {"width":70,"part":"http://oss.vvku.com/pic/vvku-dev/p/fc80cf1a28af928676e15d8af2ab7cc3/0/0.swf?zgd1bk","height":33,"type":"PIC"},
+        {"font_name":"Microsoft Yahei In-Bold Font","size":24,"text":"5880309(5880309):","type":"STR","clr":"0x3cb1f7","bBold":true},
+        { "font_name":"Microsoft Yahei In-Bold Font","size":24,"text":"20229998","type":"STR","clr":"0xda2a7e","bBold":true},
+        {"font_name":"Microsoft Yahei In-Bold Font","size":24,"text":"(20229998)","type":"STR","clr":"0xDCEA61","bBold":false},
+        {"font_name":"Microsoft Yahei In-Bold Font","size":24,"text":"赠送给","type":"STR","clr":"0x3cb1f7","bBold":true},
+        {"font_name":"Microsoft Yahei In-Bold Font","size":24,"text":"20230064","type":"STR","clr":"0xda2a7e","bBold":true},
+        {"font_name":"Microsoft Yahei In-Bold Font","size":24,"text":"(20230064)","type":"STR","clr":"0xDCEA61","bBold":false},
+        {"font_name":"Microsoft Yahei In-Bold Font","size":24,"text":1,"type":"STR","clr":"0xff0031","bBold":false},
+        {"font_name":"Microsoft Yahei In-Bold Font","size":24,"text":"个","type":"STR","clr":"0xddEB62","bBold":false},
+        {"font_name":"Microsoft Yahei In-Bold Font","size":24,"text":"兰博基尼","type":"STR","clr":"0xF634C7","bBold":true}
+    ],"__ack":12,"cmd":"SELF_SYSMSG_BroadCast"}
